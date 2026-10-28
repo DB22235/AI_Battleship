@@ -1,0 +1,950 @@
+match_id,move_number,side,coordinate,row,col,outcome,strategy
+sim_20261028T153750137129Z_0001,1,simulated_player,J3,2,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,2,simulated_ai,D6,5,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,3,simulated_player,H3,2,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,4,simulated_ai,E5,4,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,5,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,6,simulated_ai,F4,3,5,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,7,simulated_player,I3,2,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,8,simulated_ai,G7,6,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,9,simulated_player,F6,5,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,10,simulated_ai,G3,2,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,11,simulated_player,C10,9,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,12,simulated_ai,C7,6,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,13,simulated_player,G3,2,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,14,simulated_ai,H6,5,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,15,simulated_player,E7,6,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,16,simulated_ai,F8,7,5,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,17,simulated_player,F9,8,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0001,18,simulated_player,A4,3,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,19,simulated_ai,C3,2,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,20,simulated_player,H10,9,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,21,simulated_ai,I5,4,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,22,simulated_player,F3,2,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,23,simulated_ai,D2,1,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,24,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,25,simulated_ai,B4,3,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,26,simulated_player,A3,2,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,27,simulated_ai,E9,8,4,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,28,simulated_ai,D9,8,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,29,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,30,simulated_ai,E8,7,4,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,31,simulated_ai,E7,6,4,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,32,simulated_ai,E6,5,4,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,33,simulated_ai,E10,9,4,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0001,34,simulated_ai,H2,1,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,35,simulated_player,F5,4,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0001,36,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,37,simulated_ai,B8,7,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,38,simulated_player,I5,4,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,39,simulated_ai,A5,4,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,40,simulated_ai,A6,5,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,41,simulated_ai,A7,6,0,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0001,42,simulated_ai,J4,3,9,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,43,simulated_ai,J3,2,9,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,44,simulated_ai,J2,1,9,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,45,simulated_ai,J5,4,9,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0001,46,simulated_ai,I9,8,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,47,simulated_player,F2,1,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,48,simulated_ai,H8,7,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,49,simulated_player,J8,7,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,50,simulated_ai,E3,2,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,51,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,52,simulated_ai,C1,0,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,53,simulated_player,D1,0,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,54,simulated_ai,D4,3,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,55,simulated_player,E4,3,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,56,simulated_ai,J8,7,9,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,57,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,58,simulated_ai,B2,1,1,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,59,simulated_ai,B3,2,1,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0001,60,simulated_ai,G1,0,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,61,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,62,simulated_ai,G10,9,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0001,63,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0001,64,simulated_ai,A10,9,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,65,simulated_ai,A8,7,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0001,66,simulated_ai,A9,8,0,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0002,1,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,2,simulated_ai,E5,4,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,3,simulated_player,G5,4,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,4,simulated_ai,F6,5,5,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,5,simulated_ai,F5,4,5,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,6,simulated_ai,F7,6,5,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0002,7,simulated_ai,D4,3,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,8,simulated_player,A5,4,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,9,simulated_ai,D8,7,3,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,10,simulated_ai,E8,7,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,11,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,12,simulated_ai,D7,6,3,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,13,simulated_ai,D9,8,3,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,14,simulated_ai,D6,5,3,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,15,simulated_ai,D5,4,3,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0002,16,simulated_ai,G3,2,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,17,simulated_player,J5,4,9,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,18,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,19,simulated_ai,H4,3,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,20,simulated_player,G6,5,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,21,simulated_ai,C3,2,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,22,simulated_player,D7,6,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,23,simulated_ai,H8,7,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,24,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,25,simulated_ai,G9,8,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,26,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,27,simulated_ai,F2,1,5,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,28,simulated_player,E2,1,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,29,simulated_ai,I5,4,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,30,simulated_player,H5,4,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,31,simulated_ai,E1,0,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,32,simulated_player,G8,7,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,33,simulated_player,B9,8,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,34,simulated_ai,B2,1,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,35,simulated_player,G10,9,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,36,simulated_ai,J6,5,9,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,37,simulated_player,D2,1,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,38,simulated_ai,B6,5,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,39,simulated_player,E3,2,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,40,simulated_ai,A7,6,0,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,41,simulated_player,B2,1,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,42,simulated_ai,F10,9,5,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,43,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,44,simulated_ai,I7,6,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,45,simulated_player,C1,0,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,46,simulated_ai,C7,6,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,47,simulated_player,I2,1,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,48,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,49,simulated_ai,A3,2,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,50,simulated_ai,A4,3,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,51,simulated_ai,A2,1,0,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,52,simulated_player,F8,7,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,53,simulated_ai,A5,4,0,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,54,simulated_ai,A6,5,0,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0002,55,simulated_ai,B8,7,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,56,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,57,simulated_ai,H2,1,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,58,simulated_player,E4,3,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,59,simulated_ai,I3,2,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,60,simulated_player,A10,9,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,61,simulated_ai,I9,8,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,62,simulated_player,C9,8,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,63,simulated_player,H4,3,7,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,64,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,65,simulated_ai,H6,5,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,66,simulated_player,B4,3,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,67,simulated_ai,D2,1,3,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,68,simulated_player,H7,6,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,69,simulated_ai,E3,2,4,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,70,simulated_player,G9,8,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,71,simulated_ai,I1,0,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,72,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,73,simulated_ai,J4,3,9,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,74,simulated_player,B10,9,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,75,simulated_ai,C9,8,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,76,simulated_player,J1,0,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,77,simulated_ai,J8,7,9,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,78,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,79,simulated_ai,C1,0,2,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,80,simulated_player,J3,2,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,81,simulated_ai,G5,4,6,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,82,simulated_player,I4,3,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0002,83,simulated_player,E10,9,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,84,simulated_ai,H10,9,7,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,85,simulated_player,I8,7,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,86,simulated_ai,B10,9,1,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,87,simulated_player,F10,9,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,88,simulated_ai,A9,8,0,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,89,simulated_player,J9,8,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,90,simulated_ai,F4,3,5,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,91,simulated_player,D1,0,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,92,simulated_ai,C5,4,2,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,93,simulated_ai,C6,5,2,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,94,simulated_ai,C4,3,2,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0002,95,simulated_ai,J2,1,9,hit,Rule-based PDM
+sim_20261028T153750137129Z_0002,96,simulated_ai,I2,1,8,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,97,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,98,simulated_ai,J3,2,9,miss,Rule-based PDM
+sim_20261028T153750137129Z_0002,99,simulated_player,I10,9,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0002,100,simulated_ai,J1,0,9,sunk,Rule-based PDM
+sim_20261028T153750137129Z_0003,1,simulated_player,G5,4,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,2,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,3,simulated_player,I2,1,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,4,simulated_player,F3,2,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,5,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,6,simulated_player,D5,4,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,7,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,8,simulated_player,D7,6,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,9,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,10,simulated_player,J5,4,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,11,simulated_ai,F8,7,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,12,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,13,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,14,simulated_player,C10,9,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,15,simulated_player,H4,3,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,16,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,17,simulated_player,I8,7,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,18,simulated_ai,E3,2,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,19,simulated_ai,F3,2,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,20,simulated_player,F5,4,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,21,simulated_ai,E4,3,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,22,simulated_ai,E5,4,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,23,simulated_ai,E2,1,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,24,simulated_player,G3,2,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,25,simulated_ai,E6,5,4,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,26,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,27,simulated_player,G2,1,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,28,simulated_ai,I7,6,8,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,29,simulated_ai,I6,5,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,30,simulated_player,F1,0,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,31,simulated_ai,H7,6,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,32,simulated_ai,J7,6,9,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,33,simulated_ai,G7,6,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,34,simulated_ai,F7,6,5,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,35,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,36,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,37,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,38,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,39,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,40,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,41,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,42,simulated_player,F6,5,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,43,simulated_ai,B4,3,1,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,44,simulated_ai,B5,4,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,45,simulated_player,I3,2,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,46,simulated_ai,C4,3,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,47,simulated_ai,D4,3,3,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,48,simulated_ai,G1,0,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,49,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,50,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,51,simulated_player,E10,9,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,52,simulated_player,E6,5,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,53,simulated_player,J4,3,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,54,simulated_ai,B2,1,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,55,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,56,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,57,simulated_player,H10,9,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,58,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,59,simulated_player,C8,7,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,60,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,61,simulated_player,C9,8,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,62,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,63,simulated_player,A6,5,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,64,simulated_player,C6,5,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,65,simulated_player,I5,4,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,66,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,67,simulated_player,H2,1,7,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0003,68,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,69,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,70,simulated_player,E4,3,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,71,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,72,simulated_player,C1,0,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,73,simulated_ai,E9,8,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,74,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,75,simulated_ai,A7,6,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,76,simulated_ai,A8,7,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,77,simulated_player,H6,5,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,78,simulated_ai,A6,5,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,79,simulated_ai,A5,4,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,80,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,81,simulated_player,I6,5,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,82,simulated_ai,H8,7,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,83,simulated_player,J1,0,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,84,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,85,simulated_player,B3,2,1,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,86,simulated_player,E2,1,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,87,simulated_ai,F10,9,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,88,simulated_player,B6,5,1,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0003,89,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,90,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,91,simulated_player,B2,1,1,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,92,simulated_player,E5,4,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0003,93,simulated_player,F10,9,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,94,simulated_ai,B10,9,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,95,simulated_player,F7,6,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,96,simulated_ai,I1,0,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,97,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,98,simulated_ai,J2,1,9,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,99,simulated_ai,J3,2,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0003,100,simulated_player,C5,4,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0003,101,simulated_ai,I2,1,8,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,1,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,2,simulated_ai,G5,4,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,3,simulated_ai,G4,3,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,4,simulated_ai,G6,5,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,5,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,6,simulated_player,G5,4,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,7,simulated_ai,G7,6,6,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,8,simulated_ai,F4,3,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,9,simulated_ai,E4,3,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,10,simulated_ai,H4,3,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,11,simulated_ai,D4,3,3,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,12,simulated_ai,F8,7,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,13,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,14,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,15,simulated_player,E5,4,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,16,simulated_player,G6,5,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,17,simulated_ai,E9,8,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,18,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,19,simulated_ai,C3,2,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,20,simulated_player,E2,1,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,21,simulated_ai,B6,5,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,22,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,23,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,24,simulated_player,C3,2,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,25,simulated_ai,H8,7,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,26,simulated_player,C8,7,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,27,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,28,simulated_player,I5,4,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,29,simulated_ai,A5,4,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,30,simulated_player,D1,0,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,31,simulated_ai,D2,1,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,32,simulated_player,A4,3,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,33,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,34,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,35,simulated_ai,E1,0,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,36,simulated_player,C4,3,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,37,simulated_ai,J6,5,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,38,simulated_player,F6,5,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,39,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,40,simulated_player,A2,1,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,41,simulated_ai,F10,9,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,42,simulated_player,D6,5,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,43,simulated_ai,E5,4,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,44,simulated_player,D9,8,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,45,simulated_ai,I1,0,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,46,simulated_player,I7,6,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,47,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,48,simulated_player,E7,6,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,49,simulated_player,D5,4,3,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,50,simulated_player,E8,7,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,51,simulated_ai,A9,8,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,52,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,53,simulated_ai,B10,9,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,54,simulated_player,C5,4,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,55,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,56,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,57,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,58,simulated_ai,J2,1,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,59,simulated_player,A10,9,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,60,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,61,simulated_player,A5,4,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,62,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,63,simulated_player,B4,3,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,64,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,65,simulated_player,F10,9,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,66,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,67,simulated_player,I10,9,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,68,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,69,simulated_player,C9,8,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,70,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,71,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,72,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,73,simulated_player,H3,2,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,74,simulated_ai,A3,2,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,75,simulated_ai,A2,1,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,76,simulated_ai,A1,0,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,77,simulated_ai,A4,3,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,78,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,79,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,80,simulated_ai,I3,2,8,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,81,simulated_ai,H3,2,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,82,simulated_ai,J3,2,9,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,83,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,84,simulated_player,G10,9,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,85,simulated_ai,F2,1,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,86,simulated_player,E4,3,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,87,simulated_player,F7,6,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0004,88,simulated_player,B7,6,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,89,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,90,simulated_player,G1,0,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,91,simulated_ai,A7,6,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,92,simulated_ai,A8,7,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0004,93,simulated_player,C10,9,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0004,94,simulated_ai,A6,5,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,1,simulated_player,H10,9,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,2,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,3,simulated_player,D2,1,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,4,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,5,simulated_player,I5,4,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0005,6,simulated_player,B4,3,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,7,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,8,simulated_player,A9,8,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,9,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,10,simulated_player,A10,9,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,11,simulated_ai,E3,2,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,12,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,13,simulated_ai,H6,5,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,14,simulated_ai,H7,6,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,15,simulated_ai,H8,7,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,16,simulated_ai,H9,8,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,17,simulated_ai,H5,4,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,18,simulated_player,G5,4,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,19,simulated_ai,H10,9,7,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,20,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,21,simulated_player,C8,7,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,22,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,23,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,24,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,25,simulated_player,B2,1,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,26,simulated_ai,B4,3,1,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,27,simulated_ai,B5,4,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,28,simulated_player,B6,5,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,29,simulated_ai,C4,3,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,30,simulated_player,E3,2,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,31,simulated_ai,B3,2,1,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,32,simulated_ai,B2,1,1,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,33,simulated_ai,C9,8,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,34,simulated_ai,D9,8,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,35,simulated_player,H5,4,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,36,simulated_ai,C8,7,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,37,simulated_ai,C7,6,2,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,38,simulated_ai,F2,1,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,39,simulated_player,F1,0,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0005,40,simulated_player,D10,9,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,41,simulated_ai,G1,0,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,42,simulated_player,B1,0,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,43,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,44,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,45,simulated_ai,A7,6,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,46,simulated_player,A8,7,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,47,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,48,simulated_player,J5,4,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,49,simulated_ai,F8,7,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,50,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,51,simulated_ai,D2,1,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,52,simulated_player,B3,2,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,53,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,54,simulated_player,I8,7,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0005,55,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,56,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,57,simulated_player,D7,6,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,58,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,59,simulated_player,E1,0,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0005,60,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,61,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,62,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,63,simulated_ai,G7,6,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,64,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,65,simulated_ai,A3,2,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,66,simulated_ai,A4,3,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,67,simulated_ai,A5,4,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,68,simulated_player,G7,6,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,69,simulated_ai,A2,1,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,70,simulated_ai,A1,0,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,71,simulated_ai,G3,2,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,72,simulated_ai,F3,2,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,73,simulated_player,F3,2,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,74,simulated_ai,G2,1,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0005,75,simulated_player,A4,3,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0005,76,simulated_ai,H3,2,7,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,1,simulated_player,D5,4,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,2,simulated_ai,E5,4,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,3,simulated_player,E7,6,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,4,simulated_ai,F6,5,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,5,simulated_ai,G6,5,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,6,simulated_player,F10,9,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,7,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,8,simulated_ai,F7,6,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,9,simulated_ai,F8,7,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,10,simulated_ai,F5,4,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,11,simulated_ai,F4,3,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,12,simulated_ai,F3,2,5,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,13,simulated_ai,F9,8,5,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,14,simulated_ai,D4,3,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,15,simulated_player,B6,5,1,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,16,simulated_player,A9,8,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,17,simulated_ai,B6,5,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,18,simulated_player,A8,7,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,19,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,20,simulated_player,C3,2,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,21,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,22,simulated_player,A3,2,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,23,simulated_player,B7,6,1,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0006,24,simulated_player,F5,4,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,25,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,26,simulated_player,I3,2,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,27,simulated_player,H6,5,7,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,28,simulated_player,G6,5,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,29,simulated_ai,A5,4,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,30,simulated_ai,A4,3,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,31,simulated_player,I10,9,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,32,simulated_ai,A6,5,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,33,simulated_ai,A7,6,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,34,simulated_ai,A8,7,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,35,simulated_ai,A9,8,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,36,simulated_ai,C3,2,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,37,simulated_player,C1,0,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,38,simulated_ai,H8,7,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,39,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,40,simulated_ai,D8,7,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,41,simulated_ai,D9,8,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,42,simulated_player,A10,9,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,43,simulated_ai,C8,7,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,44,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,45,simulated_player,E4,3,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,46,simulated_ai,E8,7,4,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,47,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,48,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,49,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,50,simulated_player,I7,6,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,51,simulated_player,A5,4,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,52,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,53,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,54,simulated_player,G5,4,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,55,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,56,simulated_player,A2,1,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,57,simulated_ai,D2,1,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,58,simulated_player,J9,8,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,59,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,60,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,61,simulated_ai,B2,1,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,62,simulated_player,H3,2,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,63,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,64,simulated_player,D1,0,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,65,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,66,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,67,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,68,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,69,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,70,simulated_player,J8,7,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,71,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,72,simulated_player,D2,1,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,73,simulated_ai,E3,2,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,74,simulated_player,G3,2,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,75,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,76,simulated_player,D8,7,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,77,simulated_ai,J2,1,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,78,simulated_player,A4,3,0,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0006,79,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,80,simulated_ai,F2,1,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,81,simulated_player,G9,8,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,82,simulated_ai,B10,9,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,83,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,84,simulated_ai,I1,0,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,85,simulated_player,C4,3,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,86,simulated_ai,E1,0,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,87,simulated_player,J1,0,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,88,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,89,simulated_player,F2,1,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,90,simulated_ai,J6,5,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,91,simulated_player,G7,6,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,92,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,93,simulated_player,I5,4,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,94,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,95,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,96,simulated_player,I8,7,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,97,simulated_ai,G1,0,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,98,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,99,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,100,simulated_player,I6,5,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0006,101,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,102,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,103,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,104,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,105,simulated_player,B2,1,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,106,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,107,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,108,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,109,simulated_player,G2,1,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,110,simulated_ai,G7,6,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,111,simulated_player,C2,1,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,112,simulated_ai,J10,9,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,113,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,114,simulated_ai,F10,9,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,115,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,116,simulated_ai,A1,0,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,117,simulated_player,F1,0,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0006,118,simulated_ai,E9,8,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0006,119,simulated_ai,E10,9,4,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,1,simulated_player,C3,2,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,2,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,3,simulated_player,H5,4,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,4,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,5,simulated_player,E9,8,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,6,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,7,simulated_player,F8,7,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,8,simulated_player,A6,5,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,9,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,10,simulated_player,G7,6,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,11,simulated_ai,E3,2,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,12,simulated_ai,D3,2,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,13,simulated_ai,F3,2,5,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,14,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,15,simulated_player,A4,3,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,16,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,17,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,18,simulated_ai,F8,7,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,19,simulated_player,I6,5,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,20,simulated_player,H10,9,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,21,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,22,simulated_player,C1,0,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,23,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,24,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,25,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,26,simulated_player,A3,2,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,27,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,28,simulated_player,F6,5,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,29,simulated_ai,A7,6,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,30,simulated_ai,A6,5,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,31,simulated_player,C2,1,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,32,simulated_ai,A8,7,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,33,simulated_ai,A9,8,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,34,simulated_ai,A10,9,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,35,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,36,simulated_player,B6,5,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,37,simulated_ai,F10,9,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,38,simulated_player,C4,3,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,39,simulated_player,I9,8,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,40,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,41,simulated_player,C8,7,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,42,simulated_ai,E1,0,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,43,simulated_ai,D1,0,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,44,simulated_ai,C1,0,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,45,simulated_ai,F1,0,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,46,simulated_ai,G1,0,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,47,simulated_ai,B1,0,1,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,48,simulated_ai,H1,0,7,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,49,simulated_ai,A1,0,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,50,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,51,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,52,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,53,simulated_player,E6,5,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,54,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,55,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,56,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,57,simulated_ai,E5,4,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,58,simulated_player,G6,5,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,59,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,60,simulated_player,G4,3,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,61,simulated_ai,G7,6,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,62,simulated_player,A1,0,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,63,simulated_ai,E9,8,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,64,simulated_player,D10,9,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,65,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,66,simulated_player,D5,4,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,67,simulated_ai,F6,5,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,68,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,69,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,70,simulated_player,E7,6,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,71,simulated_ai,H8,7,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,72,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,73,simulated_ai,B2,1,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,74,simulated_player,E3,2,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,75,simulated_player,J4,3,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,76,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,77,simulated_player,B10,9,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,78,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,79,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,80,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,81,simulated_player,B4,3,1,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0007,82,simulated_player,H6,5,7,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,83,simulated_player,E5,4,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,84,simulated_player,F3,2,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,85,simulated_player,F4,3,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,86,simulated_player,A8,7,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,87,simulated_ai,J2,1,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,88,simulated_player,E2,1,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0007,89,simulated_player,B1,0,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,90,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,91,simulated_player,A5,4,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,92,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,93,simulated_player,B2,1,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,94,simulated_ai,C3,2,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,95,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,96,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,97,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,98,simulated_ai,B6,5,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,99,simulated_player,C10,9,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0007,100,simulated_ai,D4,3,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0007,101,simulated_ai,D5,4,3,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,1,simulated_player,A10,9,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,2,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,3,simulated_player,B9,8,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,4,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,5,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,6,simulated_ai,D6,5,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,7,simulated_ai,D7,6,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,8,simulated_ai,D5,4,3,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,9,simulated_ai,E3,2,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,10,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,11,simulated_ai,F8,7,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,12,simulated_ai,G8,7,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,13,simulated_player,B10,9,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,14,simulated_ai,F7,6,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,15,simulated_ai,F9,8,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,16,simulated_player,J5,4,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,17,simulated_ai,F6,5,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,18,simulated_ai,F5,4,5,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,19,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,20,simulated_player,C2,1,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,21,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,22,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,23,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,24,simulated_player,A3,2,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,25,simulated_ai,F2,1,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,26,simulated_ai,G2,1,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,27,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,28,simulated_ai,E2,1,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,29,simulated_ai,D2,1,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,30,simulated_ai,C2,1,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,31,simulated_ai,B2,1,1,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,32,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,33,simulated_player,I3,2,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,34,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,35,simulated_player,G1,0,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,36,simulated_player,J3,2,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,37,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,38,simulated_player,J7,6,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,39,simulated_ai,A7,6,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,40,simulated_player,A6,5,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,41,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,42,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,43,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,44,simulated_player,G3,2,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,45,simulated_player,I9,8,8,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,46,simulated_player,E4,3,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,47,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,48,simulated_player,J1,0,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,49,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,50,simulated_player,H3,2,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,51,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,52,simulated_player,A9,8,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,53,simulated_player,E8,7,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,54,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,55,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,56,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,57,simulated_player,J2,1,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,58,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,59,simulated_player,F10,9,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,60,simulated_ai,B6,5,1,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,61,simulated_ai,C6,5,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,62,simulated_player,G7,6,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,63,simulated_ai,B7,6,1,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,64,simulated_ai,D1,0,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,65,simulated_player,J9,8,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,66,simulated_ai,G1,0,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,67,simulated_player,E7,6,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,68,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,69,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,70,simulated_ai,H3,2,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,71,simulated_player,G6,5,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,72,simulated_player,B8,7,1,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,73,simulated_player,B7,6,1,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,74,simulated_player,I2,1,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,75,simulated_ai,A10,9,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,76,simulated_player,E1,0,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0008,77,simulated_player,E6,5,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,78,simulated_ai,J1,0,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,79,simulated_player,D8,7,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,80,simulated_ai,G4,3,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,81,simulated_player,G9,8,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0008,82,simulated_ai,C8,7,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,83,simulated_ai,D8,7,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0008,84,simulated_ai,E8,7,4,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,1,simulated_player,A8,7,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,2,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,3,simulated_player,A6,5,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,4,simulated_player,B2,1,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,5,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,6,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,7,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,8,simulated_player,E6,5,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,9,simulated_player,E1,0,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,10,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,11,simulated_player,G1,0,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,12,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,13,simulated_player,C1,0,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,14,simulated_ai,E3,2,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,15,simulated_player,G4,3,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,16,simulated_player,E9,8,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,17,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,18,simulated_player,B1,0,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,19,simulated_ai,F8,7,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,20,simulated_ai,G8,7,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,21,simulated_ai,E8,7,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,22,simulated_ai,H8,7,7,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,23,simulated_ai,D2,1,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,24,simulated_player,C3,2,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,25,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,26,simulated_player,D3,2,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,27,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,28,simulated_player,H4,3,7,sunk,uniform random legal shot
+sim_20261028T153750137129Z_0009,29,simulated_player,H9,8,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,30,simulated_ai,C9,8,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,31,simulated_player,H5,4,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,32,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,33,simulated_player,E10,9,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,34,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,35,simulated_player,C7,6,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,36,simulated_ai,B8,7,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,37,simulated_player,F10,9,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,38,simulated_ai,A7,6,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,39,simulated_player,G7,6,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,40,simulated_player,A5,4,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,41,simulated_player,D5,4,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,42,simulated_ai,D10,9,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,43,simulated_player,E5,4,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,44,simulated_player,F9,8,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,45,simulated_ai,G1,0,6,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,46,simulated_ai,F1,0,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,47,simulated_ai,E1,0,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,48,simulated_ai,H1,0,7,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,49,simulated_ai,I1,0,8,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,50,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,51,simulated_player,E2,1,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,52,simulated_ai,J4,3,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,53,simulated_player,G3,2,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,54,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,55,simulated_player,F5,4,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,56,simulated_ai,C3,2,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,57,simulated_player,E3,2,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,58,simulated_player,B10,9,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,59,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,60,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,61,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,62,simulated_player,G8,7,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,63,simulated_player,F4,3,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,64,simulated_ai,B6,5,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,65,simulated_player,J9,8,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,66,simulated_ai,B2,1,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,67,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,68,simulated_ai,D4,3,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,69,simulated_ai,D3,2,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,70,simulated_ai,D5,4,3,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,71,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,72,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,73,simulated_ai,I5,4,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,74,simulated_player,J7,6,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,75,simulated_ai,F6,5,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,76,simulated_player,C10,9,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,77,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,78,simulated_player,F2,1,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,79,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,80,simulated_player,B7,6,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,81,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,82,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,83,simulated_ai,E9,8,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,84,simulated_player,D2,1,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,85,simulated_ai,A5,4,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,86,simulated_player,G10,9,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,87,simulated_ai,B10,9,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,88,simulated_player,H6,5,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,89,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,90,simulated_player,I4,3,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,91,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,92,simulated_player,H8,7,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,93,simulated_ai,J6,5,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,94,simulated_player,E7,6,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,95,simulated_player,A7,6,0,hit,uniform random legal shot
+sim_20261028T153750137129Z_0009,96,simulated_player,D4,3,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,97,simulated_ai,G7,6,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,98,simulated_player,H7,6,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,99,simulated_ai,A9,8,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,100,simulated_ai,A8,7,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,101,simulated_player,C9,8,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,102,simulated_ai,A10,9,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,103,simulated_player,G2,1,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0009,104,simulated_ai,B9,8,1,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,105,simulated_ai,E6,5,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,106,simulated_ai,E4,3,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0009,107,simulated_ai,E5,4,4,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,1,simulated_player,J10,9,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,2,simulated_ai,D6,5,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,3,simulated_player,E10,9,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,4,simulated_ai,E5,4,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,5,simulated_player,G7,6,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,6,simulated_ai,F8,7,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,7,simulated_player,A5,4,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,8,simulated_ai,G7,6,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,9,simulated_player,F2,1,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,10,simulated_ai,F4,3,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,11,simulated_player,E7,6,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,12,simulated_player,F5,4,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,13,simulated_ai,G3,2,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,14,simulated_player,H5,4,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,15,simulated_ai,C7,6,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,16,simulated_player,B6,5,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,17,simulated_ai,H6,5,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,18,simulated_player,I6,5,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,19,simulated_ai,E9,8,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,20,simulated_player,J8,7,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,21,simulated_ai,C3,2,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,22,simulated_player,G8,7,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,23,simulated_ai,B4,3,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,24,simulated_player,G9,8,6,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,25,simulated_player,B10,9,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,26,simulated_ai,I5,4,8,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,27,simulated_ai,I6,5,8,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,28,simulated_ai,I4,3,8,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,29,simulated_ai,D2,1,3,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,30,simulated_ai,E2,1,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,31,simulated_ai,F2,1,5,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,32,simulated_ai,C2,1,2,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,33,simulated_ai,A5,4,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,34,simulated_ai,A4,3,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,35,simulated_ai,A3,2,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,36,simulated_player,F3,2,5,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,37,simulated_ai,A6,5,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,38,simulated_ai,A7,6,0,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,39,simulated_ai,A8,7,0,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,40,simulated_ai,H8,7,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,41,simulated_player,J6,5,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,42,simulated_ai,D8,7,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,43,simulated_player,D7,6,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,44,simulated_ai,H2,1,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,45,simulated_player,I3,2,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,46,simulated_ai,I9,8,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,47,simulated_player,B5,4,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,48,simulated_ai,C9,8,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,49,simulated_ai,B9,8,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,50,simulated_player,G3,2,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,51,simulated_ai,C8,7,2,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,52,simulated_ai,C10,9,2,sunk,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,53,simulated_ai,F6,5,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,54,simulated_player,I1,0,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,55,simulated_ai,E7,6,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,56,simulated_player,G2,1,6,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,57,simulated_ai,D4,3,3,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,58,simulated_player,E6,5,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,59,simulated_player,B7,6,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,60,simulated_ai,G5,4,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,61,simulated_player,A9,8,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,62,simulated_ai,G9,8,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,63,simulated_player,I9,8,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,64,simulated_ai,C5,4,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,65,simulated_player,A7,6,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,66,simulated_ai,G1,0,6,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,67,simulated_player,H2,1,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,68,simulated_ai,I1,0,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,69,simulated_player,B3,2,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,70,simulated_ai,B6,5,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,71,simulated_player,B1,0,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,72,simulated_ai,I7,6,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,73,simulated_player,H4,3,7,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,74,simulated_player,H6,5,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,75,simulated_ai,I3,2,8,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,76,simulated_player,C3,2,2,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,77,simulated_player,E9,8,4,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,78,simulated_player,C2,1,2,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,79,simulated_ai,E3,2,4,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,80,simulated_player,J5,4,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,81,simulated_ai,H4,3,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,82,simulated_player,I8,7,8,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,83,simulated_ai,B2,1,1,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,84,simulated_player,B8,7,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,85,simulated_ai,H10,9,7,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,86,simulated_player,J1,0,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,87,simulated_ai,J2,1,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,88,simulated_player,A3,2,0,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,89,simulated_ai,J8,7,9,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,90,simulated_player,B9,8,1,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,91,simulated_ai,F10,9,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,92,simulated_player,F4,3,5,hit,uniform random legal shot
+sim_20261028T153750137129Z_0010,93,simulated_player,J7,6,9,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,94,simulated_ai,C1,0,2,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,95,simulated_player,D10,9,3,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,96,simulated_ai,A1,0,0,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,97,simulated_player,H1,0,7,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,98,simulated_ai,E1,0,4,hit,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,99,simulated_ai,F1,0,5,miss,Adaptive PDM + synthetic layout profile
+sim_20261028T153750137129Z_0010,100,simulated_player,E3,2,4,miss,uniform random legal shot
+sim_20261028T153750137129Z_0010,101,simulated_ai,D1,0,3,sunk,Adaptive PDM + synthetic layout profile

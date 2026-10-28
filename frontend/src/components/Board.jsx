@@ -13,7 +13,8 @@ export function Board({
   previewCells = [],
   isPreviewValid = true,
   heatmap = null,
-  showHeatmap = false
+  showHeatmap = false,
+  showShips = true
 }) {
   return (
     <div className={`board-wrapper ${isInteractive ? 'interactive-target' : ''}`}>
@@ -52,7 +53,7 @@ export function Board({
                 if (cellObj.result === 'sunk') cellClasses.push('cell-sunk shot-fired');
                 else if (cellObj.result === 'hit') cellClasses.push('cell-hit shot-fired');
                 else if (cellObj.result === 'miss') cellClasses.push('cell-miss shot-fired');
-                else if (cellObj.shipId) cellClasses.push('cell-ship');
+                else if (showShips && cellObj.shipId) cellClasses.push('cell-ship');
               }
 
               if (isSelected) cellClasses.push('cell-selected');

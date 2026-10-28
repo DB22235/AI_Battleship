@@ -1,0 +1,80 @@
+{
+  "experiment": "ship_cell_occupancy",
+  "seed": 20261028,
+  "games": 600,
+  "split_by_complete_game": {
+    "train": 420,
+    "validation": 90,
+    "test": 90
+  },
+  "rows": {
+    "train": 346080,
+    "validation": 74160,
+    "test": 74160
+  },
+  "features": [
+    "row_norm",
+    "col_norm",
+    "center_distance",
+    "edge_distance",
+    "is_corner",
+    "row_parity",
+    "col_parity",
+    "shots_fraction",
+    "observed_hits_fraction",
+    "observed_misses_fraction",
+    "adjacent_unsunk_hits",
+    "adjacent_misses",
+    "diagonal_unsunk_hits",
+    "same_row_unsunk_hits",
+    "same_col_unsunk_hits",
+    "nearest_unsunk_hit_distance",
+    "remaining_segments_fraction",
+    "remaining_ships_fraction"
+  ],
+  "held_out_test": {
+    "positive_rate": 0.16680151224136353,
+    "observable_base_rate": {
+      "average_precision": 0.16672688785406717,
+      "brier_score": 0.1412811577320099
+    },
+    "numpy_mlp": {
+      "average_precision": 0.359777731659942,
+      "brier_score": 0.12593621015548706
+    }
+  },
+  "validation_policy_weight_selection": {
+    "layout_count": 90,
+    "mean_shots_by_model_weight": {
+      "0.0": 44.27777777777778,
+      "0.05": 45.888888888888886,
+      "0.1": 45.8,
+      "0.2": 46.166666666666664
+    },
+    "selected_model_weight": 0.0
+  },
+  "full_game_policy_evaluation_on_independent_layouts": {
+    "pdm": {
+      "games": 150,
+      "mean_shots_to_sink": 44.94,
+      "median_shots_to_sink": 44.5,
+      "mean_hit_rate": 0.37828215398308856,
+      "invalid_or_repeated_shots": 0,
+      "mean_decision_time_ms": 2.233720234395048
+    },
+    "hybrid": {
+      "games": 150,
+      "mean_shots_to_sink": 44.94,
+      "median_shots_to_sink": 44.5,
+      "mean_hit_rate": 0.37828215398308856,
+      "invalid_or_repeated_shots": 0,
+      "mean_decision_time_ms": 2.2743406171582237
+    },
+    "hybrid_minus_pdm_mean_shots": 0.0
+  },
+  "limitations": [
+    "Synthetic uniformly placed standard fleets only; no real-human generalization claim.",
+    "Full-game evaluation is one configured deterministic-weight hybrid comparison, not a measured two-sided win rate.",
+    "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid."
+  ]
+}

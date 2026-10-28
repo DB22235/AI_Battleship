@@ -52,6 +52,7 @@ desktop.ini
 
 # Python / Offline Research ML artifacts
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.so
@@ -77,6 +78,18 @@ wheels/
 *.egg
 .pytest_cache/
 .ipynb_checkpoints/
+
+# Local FastAPI match history contains player-created fleet layouts and moves.
+# Keep real-game data local, but retain the explicitly synthetic teacher-demo CSVs.
+model/data/*.csv
+!model/data/simulation/
+!model/data/simulation/*.csv
+
+# Local service state / coverage output
+.coverage
+htmlcov/
+.ruff_cache/
+.mypy_cache/
 
 # Temporary / Scratch files
 tmp/

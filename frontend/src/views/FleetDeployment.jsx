@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BOARD_SIZE, COL_LABELS, ROW_LABELS, FLEET_CONFIG, rowColToLabel } from '../types/constants.js';
 import { RulesValidator } from '../engine/rules.js';
+import { LocalStorageProvider } from '../storage/storage.js';
 
 export function FleetDeployment({ difficulty, onLaunchMatch, onBack }) {
   const [placedShips, setPlacedShips] = useState([]);
@@ -10,6 +11,7 @@ export function FleetDeployment({ difficulty, onLaunchMatch, onBack }) {
 
   const isAllShipsPlaced = placedShips.length === FLEET_CONFIG.length;
   const currentCfg = FLEET_CONFIG[selectedShipIndex];
+  const learnedLayoutCount = LocalStorageProvider.getPlayerFleetLayouts().length;
 
   // Rotate on 'R' key
   useEffect(() => {
@@ -75,6 +77,11 @@ export function FleetDeployment({ difficulty, onLaunchMatch, onBack }) {
           <p style={{ color: 'var(--text-secondary)', fontSize: '13px' }}>
             Position your naval assets. Opponent policy: <span className="badge badge-cyan">{difficulty.toUpperCase()}</span>
           </p>
+          {difficulty === 'adaptive' && (
+            <p style={{ color: 'var(--text-muted)', fontSize: '12px', marginTop: '6px' }}>
+              Local fleet-placement history: {learnedLayoutCount} completed match{learnedLayoutCount === 1 ? '' : 'es'}. Adaptive starts using your past layouts after 2 completed matches.
+            </p>
+          )}
         </div>
 
         <div style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'center', flexWrap: 'wrap' }}>

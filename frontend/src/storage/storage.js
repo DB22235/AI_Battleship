@@ -7,6 +7,9 @@ const STORAGE_KEYS = {
   PROGRESS: 'adaptive_battleship_progress_v1',
   HISTORY: 'adaptive_battleship_history_v1',
   PLAYER_SHOT_PATTERNS: 'adaptive_battleship_player_shots_v1',
+  PLAYER_FLEET_LAYOUTS: 'adaptive_battleship_player_fleet_layouts_v1',
+  FLEET_LAYOUT_LOG: 'adaptive_battleship_fleet_layout_log_v1',
+  AI_LEARNING_LOG: 'adaptive_battleship_ai_learning_log_v1',
 };
 
 const DEFAULT_SETTINGS = {
@@ -50,7 +53,7 @@ export class LocalStorageProvider {
     }
   }
 
-  static recordMatchResult({ won, difficulty, turns, hitRate }) {
+  static recordMatchResult({ won, difficulty, turns, hitRate, matchId }) {
     try {
       const progress = this.getProgress();
       if (won) {
@@ -68,7 +71,7 @@ export class LocalStorageProvider {
 
       const history = this.getHistory();
       history.unshift({
-        id: `match_${Date.now()}`,
+        id: matchId || `match_${Date.now()}`,
         timestamp: new Date().toISOString(),
         difficulty,
         result: won ? 'victory' : 'defeat',
@@ -92,24 +95,151 @@ export class LocalStorageProvider {
     }
   }
 
-  static recordPlayerShot(row, col) {
+  static recordPlayerFleetLayout(ships, matchId = null) {
     try {
-      const patterns = this.getPlayerShotPatterns();
-      const key = `${row},${col}`;
-      patterns[key] = (patterns[key] || 0) + 1;
-      patterns._totalShots = (patterns._totalShots || 0) + 1;
-      localStorage.setItem(STORAGE_KEYS.PLAYER_SHOT_PATTERNS, JSON.stringify(patterns));
+      const cells = ships.flatMap(ship => ship.cells.map(cell => ({ row: cell.row, col: cell.col })));
+      if (cells.length !== 17) return false;
+      const history = this.getPlayerFleetLayouts();
+      history.unshift({
+        id: matchId || `fleet_${Date.now()}`,
+        matchId: matchId || null,
+        timestamp: new Date().toISOString(),
+        cells,
+      });
+      localStorage.setItem(STORAGE_KEYS.PLAYER_FLEET_LAYOUTS, JSON.stringify(history.slice(0, 20)));
+      return true;
     } catch (e) {
-      console.warn('Unable to record player shot pattern', e);
+      console.warn('Unable to save player fleet layout locally', e);
+      return false;
     }
   }
 
-  static getPlayerShotPatterns() {
+  static recordFleetDeployment({ matchId, difficulty, ships, startedAt = new Date().toISOString() }) {
     try {
-      const data = localStorage.getItem(STORAGE_KEYS.PLAYER_SHOT_PATTERNS);
-      return data ? JSON.parse(data) : { _totalShots: 0 };
+      const records = this.getFleetLayoutLog();
+      records.unshift({
+        matchId,
+        timestamp: startedAt,
+        difficulty,
+        status: 'in_progress',
+        result: '',
+        ships: ships.map(ship => ({
+          id: ship.id,
+          name: ship.name,
+          length: ship.length,
+          orientation: ship.orientation,
+          startRow: ship.startRow,
+          startCol: ship.startCol,
+          cells: ship.cells.map(cell => ({ row: cell.row, col: cell.col })),
+        })),
+      });
+      localStorage.setItem(STORAGE_KEYS.FLEET_LAYOUT_LOG, JSON.stringify(records.slice(0, 500)));
+      return true;
+    } catch (e) {
+      console.warn('Unable to record fleet deployment locally', e);
+      return false;
+    }
+  }
+
+  static completeFleetDeployment({ matchId, won, difficulty, turns, ships }) {
+    try {
+      const records = this.getFleetLayoutLog();
+      let record = records.find(item => item.matchId === matchId);
+      if (!record) {
+        this.recordFleetDeployment({ matchId, difficulty, ships });
+        record = this.getFleetLayoutLog().find(item => item.matchId === matchId);
+      }
+      if (record) {
+        record.status = 'completed';
+        record.result = won ? 'victory' : 'defeat';
+        record.turns = turns;
+        record.completedAt = new Date().toISOString();
+        localStorage.setItem(STORAGE_KEYS.FLEET_LAYOUT_LOG, JSON.stringify(records.slice(0, 500)));
+      }
+      return this.recordPlayerFleetLayout(ships, matchId);
+    } catch (e) {
+      console.warn('Unable to complete fleet deployment log', e);
+      return false;
+    }
+  }
+
+  static getFleetLayoutLog() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.FLEET_LAYOUT_LOG);
+      const records = data ? JSON.parse(data) : [];
+      const safeRecords = Array.isArray(records) ? records : [];
+      const knownIds = new Set(safeRecords.map(record => record.matchId));
+      const legacyRecords = this.getPlayerFleetLayouts()
+        .filter(layout => !knownIds.has(layout.matchId || layout.id))
+        .map(layout => ({
+          matchId: layout.matchId || layout.id,
+          timestamp: layout.timestamp,
+          completedAt: layout.timestamp,
+          difficulty: layout.difficulty || 'unknown',
+          status: 'completed',
+          result: 'legacy_record',
+          ships: [{
+            id: 'legacy_occupancy',
+            name: 'Legacy fleet occupancy (ship grouping unavailable)',
+            length: layout.cells.length,
+            orientation: 'unknown',
+            startRow: '',
+            startCol: '',
+            cells: layout.cells,
+          }],
+        }));
+      return [...safeRecords, ...legacyRecords];
     } catch {
-      return { _totalShots: 0 };
+      return [];
+    }
+  }
+
+  static recordAIEvent(event) {
+    try {
+      const events = this.getAILearningLog();
+      events.push({ id: `ai_${Date.now()}_${events.length}`, timestamp: new Date().toISOString(), ...event });
+      localStorage.setItem(STORAGE_KEYS.AI_LEARNING_LOG, JSON.stringify(events.slice(-10000)));
+      return true;
+    } catch (e) {
+      console.warn('Unable to record AI learning event locally', e);
+      return false;
+    }
+  }
+
+  static getAILearningLog() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.AI_LEARNING_LOG);
+      if (!data) {
+        const legacyEvents = this.getPlayerFleetLayouts().map((layout, index) => ({
+          id: `historical_layout_${layout.matchId || layout.id}`,
+          timestamp: layout.timestamp,
+          eventType: 'historical_layout_import',
+          matchId: layout.matchId || layout.id,
+          profileLayoutCountBefore: index,
+          profileLayoutCountAfter: index + 1,
+          fleetCellsLearned: layout.cells.length,
+          trainingSource: 'previously saved completed player fleet layout; per-shot AI logs were not available',
+          updateApplied: true,
+        }));
+        if (legacyEvents.length) {
+          localStorage.setItem(STORAGE_KEYS.AI_LEARNING_LOG, JSON.stringify(legacyEvents));
+          return legacyEvents;
+        }
+      }
+      const events = data ? JSON.parse(data) : [];
+      return Array.isArray(events) ? events : [];
+    } catch {
+      return [];
+    }
+  }
+
+  static getPlayerFleetLayouts() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEYS.PLAYER_FLEET_LAYOUTS);
+      const layouts = data ? JSON.parse(data) : [];
+      return Array.isArray(layouts) ? layouts.filter(layout => Array.isArray(layout.cells)) : [];
+    } catch {
+      return [];
     }
   }
 
@@ -119,6 +249,9 @@ export class LocalStorageProvider {
       localStorage.removeItem(STORAGE_KEYS.PROGRESS);
       localStorage.removeItem(STORAGE_KEYS.HISTORY);
       localStorage.removeItem(STORAGE_KEYS.PLAYER_SHOT_PATTERNS);
+      localStorage.removeItem(STORAGE_KEYS.PLAYER_FLEET_LAYOUTS);
+      localStorage.removeItem(STORAGE_KEYS.FLEET_LAYOUT_LOG);
+      localStorage.removeItem(STORAGE_KEYS.AI_LEARNING_LOG);
       return true;
     } catch (e) {
       console.warn('Reset local data failed', e);

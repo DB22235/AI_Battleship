@@ -2,17 +2,17 @@
    Adaptive AI Battleship — Difficulty Policies & Shot Selector
    ========================================================================== */
 
-import { areCellsEqual } from '../types/constants.js';
 import { PDMSolver } from './pdm-solver.js';
-import { LocalStorageProvider } from '../storage/storage.js';
+import { PersonalizedOccupancyModel } from './personalized-occupancy.js';
+import { BackendClient } from '../api/backend-client.js';
 
 export class AIPolicies {
-  static selectTarget(difficulty, state) {
+  static async selectTarget(difficulty, state, playerFleetLayouts = []) {
     switch (difficulty.toLowerCase()) {
       case 'recruit':
         return this.recruitPolicy(state);
       case 'adaptive':
-        return this.adaptivePolicy(state);
+        return this.adaptivePolicy(state, playerFleetLayouts);
       case 'commander':
         return this.commanderPolicy(state);
       case 'strategist':
@@ -98,43 +98,45 @@ export class AIPolicies {
     };
   }
 
-  static adaptivePolicy(state) {
+  static async adaptivePolicy(state, playerFleetLayouts = []) {
     const { candidates } = PDMSolver.computeDensity(state);
     if (candidates.length === 0) {
       return this.recruitPolicy(state);
     }
 
-    const history = LocalStorageProvider.getHistory();
-    const hasEnoughData = history.length >= 2;
-
-    if (!hasEnoughData) {
-      const res = this.strategistPolicy(state);
-      return {
-        ...res,
-        strategy: 'Adaptive (Rule-Based Fallback Active)',
-        modelStatus: 'demo_model',
-        explanation: 'Insufficient player history in this browser (< 2 matches). Rule-based fallback active.',
+    let profile;
+    try {
+      const response = await BackendClient.scoreAdaptive(state, candidates);
+      profile = {
+        candidates: response.candidates,
+        layoutCount: response.profileLayoutCount,
+        profileWeight: response.profileWeight,
+        modelWeight: response.syntheticModelWeight,
+        explanation: response.explanation,
+        strategy: response.strategy,
+        modelStatus: response.modelStatus,
       };
+    } catch (error) {
+      profile = PersonalizedOccupancyModel.combine(candidates, playerFleetLayouts, state);
+      profile.explanation += ' Backend unavailable; using the browser-local profile fallback.';
+      profile.modelStatus = profile.layoutCount >= 2 ? 'local_profile' : 'rule_based';
     }
 
-    const patterns = LocalStorageProvider.getPlayerShotPatterns();
-    const totalRecorded = patterns._totalShots || 1;
-
-    for (const item of candidates) {
-      const clickCount = patterns[`${item.cell.row},${item.cell.col}`] || 0;
-      const playerPreference = clickCount / totalRecorded;
-      item.score = item.score * 0.8 + (playerPreference * 100) * 0.2;
-    }
-
-    candidates.sort((a, b) => b.score - a.score);
-    const selected = candidates[0];
+    const selected = profile.candidates[0];
 
     return {
       targetCell: selected.cell,
-      strategy: 'Adaptive (Hybrid PDM + Local Player Profile)',
-      modelStatus: 'demo_model',
-      explanation: 'Blending probability density solver with observed player click density from local browser history.',
-      candidates: candidates.slice(0, 15),
+      strategy: profile.strategy || (profile.layoutCount >= 2
+        ? 'Adaptive (Rule-Based + Local Fleet Profile)'
+        : profile.modelWeight > 0
+          ? 'Adaptive (Rule-Based + Synthetic Model; Profile Collecting Data)'
+          : 'Adaptive (Rule-Based; Profile Collecting Data)'),
+      modelStatus: profile.modelStatus || (profile.layoutCount >= 2 ? 'local_profile' : profile.modelWeight > 0 ? 'trained_model' : 'rule_based'),
+      profileLayoutCount: profile.layoutCount,
+      profileWeight: profile.profileWeight,
+      syntheticModelWeight: profile.modelWeight,
+      explanation: profile.explanation,
+      candidates: profile.candidates.slice(0, 15),
     };
   }
 

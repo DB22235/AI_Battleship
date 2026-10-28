@@ -1,6 +1,6 @@
 # Adaptive AI Battleship — React Tactical Command Center
 
-A high-fidelity, explainable Battleship strategy web application built entirely in **React 18** with **JSX**, modular component hierarchy, custom hooks, and zero backend dependencies.
+A high-fidelity, explainable Battleship strategy web application built in **React 18** with **JSX**, backed by a local FastAPI service for match history and fleet-profile learning.
 
 ---
 
@@ -21,8 +21,10 @@ frontend/
     ├── App.jsx                  # Main React SPA Controller & State Machine
     ├── types/
     │   └── constants.js         # Fleet config, coordinate utilities (A1-J10 <-> [0,9])
+    ├── api/
+    │   └── backend-client.js    # Local FastAPI client used by gameplay and research views
     ├── storage/
-    │   └── storage.js           # Browser-local persistence ("Stored in this browser")
+    │   └── storage.js           # Browser-local preferences/progression and offline fallback
     ├── engine/
     │   ├── rules.js             # Collision checks, bounds validator, legal randomizer
     │   ├── board.js             # Board matrix model, hit/miss/sunk logic
@@ -49,15 +51,21 @@ frontend/
 
 ---
 
-## How to Run
+## How to Run (Local Frontend + FastAPI)
 
-### Option 1: Zero-Setup Direct Browser Execution
-Open `frontend/index.html` directly in any browser (or launch via VS Code Live Server). The application uses modern browser-native ES module import maps and Babel standalone to execute JSX on the fly with **zero npm commands or build steps required**.
+From the project root, install and run the local API in one terminal:
 
-### Option 2: Standard Vite Tooling
+```bash
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.app.main:app --reload --port 8001
+```
+
+In a second terminal, start Vite:
+
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Runs at `http://localhost:3000`.
+
+Open `http://localhost:3000`. Vite proxies `/api` requests to `http://127.0.0.1:8001`. FastAPI creates `model/data/` and appends `matches.csv`, `player_fleet_layouts.csv`, and `adaptive_ai_learning_log.csv`. Open **Learning Lab** to inspect profile counts and download the project logs; open **Match History → Moves & learning** to inspect a match's moves and AI decisions.

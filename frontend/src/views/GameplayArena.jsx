@@ -169,6 +169,7 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
             }
             subtitle={<>Target Ships Left: <strong className="text-cyan">{enemyRemaining}/5</strong></>}
             grid={gameEngine.enemyBoard.grid}
+            showShips={false}
             isInteractive={isPlayerTurn && !gameEngine.isPaused}
             selectedCell={selected}
             onCellClick={handleCellClick}

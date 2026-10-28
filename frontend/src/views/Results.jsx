@@ -67,7 +67,9 @@ export function Results({ summary, progress, onPlayAgain, onReturnHome }) {
         </div>
 
         <div style={{ marginTop: 'var(--space-5)', fontSize: '12px', color: 'var(--text-muted)' }}>
-          Match statistics have been safely saved to this browser.
+          {summary.backendSaved
+            ? 'Match, player shots, fleet layout, and AI decisions saved to the local FastAPI backend. Adaptive can use this completed fleet in later matches.'
+            : `Backend save unavailable${summary.backendError ? `: ${summary.backendError}` : ''}. This match remains in browser fallback history; start the API to keep project CSV records.`}
         </div>
       </div>
     </div>

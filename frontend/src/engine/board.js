@@ -57,6 +57,12 @@ export class Board {
         for (const c of hitShip.cells) {
           this.grid[c.row][c.col].result = 'sunk';
         }
+        // Keep observable shot history aligned with the now-known sunk ship.
+        for (const shot of this.shots) {
+          if (hitShip.cells.some(c => areCellsEqual(c, shot.cell))) {
+            shot.result = 'sunk';
+          }
+        }
       }
 
       const shotRecord = {
