@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Adaptive AI Battleship — Design Tokens (Tactical Command Center)
+   ========================================================================== */
+
+:root {
+  /* Color Palette */
+  --bg-primary: #080D18;
+  --bg-secondary: #0D1525;
+  --surface-card: #111C2E;
+  --surface-elevated: #17243A;
+  --surface-hover: #1E2D47;
+
+  /* Tactical Accents */
+  --accent-cyan: #45D7E8;
+  --accent-cyan-glow: rgba(69, 215, 232, 0.25);
+  --accent-blue: #568BFF;
+  --accent-blue-glow: rgba(86, 139, 255, 0.25);
+  --accent-purple: #A78BFA;
+  --accent-purple-glow: rgba(167, 139, 250, 0.25);
+
+  /* Status Tokens */
+  --status-hit: #FF647C;
+  --status-hit-glow: rgba(255, 100, 124, 0.35);
+  --status-miss: #7F93AC;
+  --status-success: #4ADE9B;
+  --status-warning: #FBBF65;
+
+  /* Typography Colors */
+  --text-primary: #F2F6FC;
+  --text-secondary: #A6B4C8;
+  --text-muted: #72829A;
+
+  /* Borders & Dividers */
+  --border-subtle: #24334A;
+  --border-active: #45D7E8;
+
+  /* Sizing & Typography */
+  --font-family-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Spacing Scale (8px system) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* Border Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* Shadows & Elevation */
+  --shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --shadow-elevated: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 0 1px var(--border-subtle);
+  --shadow-glow-cyan: 0 0 20px rgba(69, 215, 232, 0.3);
+  --shadow-glow-hit: 0 0 20px rgba(255, 100, 124, 0.4);
+
+  /* Transitions */
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+

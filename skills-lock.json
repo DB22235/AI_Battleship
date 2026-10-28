@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "agent": "antigravity",
+  "skills": {
+    "frontend-design": {
+      "source": "antigravity/skills",
+      "sourceType": "workspace",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "antigravity-frontend-design-v1"
+    },
+    "battleship-ai": {
+      "source": "antigravity/skills",
+      "sourceType": "workspace",
+      "skillPath": "skills/battleship-ai/SKILL.md",
+      "computedHash": "antigravity-battleship-ai-v1"
+    }
+  }
+}

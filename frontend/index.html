@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive AI Battleship — React Tactical Command Center</title>
+
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tactical Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/boards.css">
+
+  <!-- ES Import Map for Browser-Native React 18 Loading -->
+  <script type="importmap">
+  {
+    "imports": {
+      "react": "https://esm.sh/react@18.2.0",
+      "react-dom": "https://esm.sh/react-dom@18.2.0",
+      "react-dom/client": "https://esm.sh/react-dom@18.2.0/client"
+    }
+  }
+  </script>
+
+  <!-- Babel Standalone (enables direct browser execution of JSX without build step) -->
+  <script src="https://unpkg.com/@babel/standalone@7.24.0/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- React 18 JSX Entry for Vite & Modern Browsers -->
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>
