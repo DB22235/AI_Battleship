@@ -33,6 +33,23 @@ export class Board {
     return this.grid[row][col].shot;
   }
 
+  isLegalSonarCenter(row, col) {
+    return Number.isInteger(row) && Number.isInteger(col) &&
+      row >= 1 && row <= BOARD_SIZE - 2 && col >= 1 && col <= BOARD_SIZE - 2;
+  }
+
+  scanUnshotShipCount(row, col) {
+    if (!this.isLegalSonarCenter(row, col)) return null;
+    let count = 0;
+    for (let r = row - 1; r <= row + 1; r += 1) {
+      for (let c = col - 1; c <= col + 1; c += 1) {
+        const cell = this.grid[r][c];
+        if (cell.shipId !== null && !cell.shot) count += 1;
+      }
+    }
+    return count;
+  }
+
   receiveShot(row, col) {
     if (this.isCellShot(row, col)) {
       return { success: false, reason: 'Cell has already been shot' };

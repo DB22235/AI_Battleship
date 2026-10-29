@@ -122,6 +122,34 @@ export class PDMSolver {
       }
     }
 
+    // Sonar counts are aggregate constraints, not per-cell labels. Reweight
+    // each scanned region by its observed remaining occupancy versus the
+    // PDM's approximate expected occupancy. A zero count is an exact exclusion.
+    for (const scan of state.sonarObservations || []) {
+      const { row, col } = scan.center;
+      let remainingCount = scan.count;
+      const shotsAtScan = Number.isInteger(scan.shotsObserved) ? scan.shotsObserved : 0;
+      for (const shot of state.shotResults.slice(shotsAtScan)) {
+        const inRegion = Math.abs(shot.cell.row - row) <= 1 && Math.abs(shot.cell.col - col) <= 1;
+        if (inRegion && (shot.result === 'hit' || shot.result === 'sunk')) remainingCount -= 1;
+      }
+      const regionCells = [];
+      for (let r = row - 1; r <= row + 1; r += 1) {
+        for (let c = col - 1; c <= col + 1; c += 1) {
+          if (!shotSet.has(`${r},${c}`)) regionCells.push({ row: r, col: c });
+        }
+      }
+      remainingCount = Math.max(0, Math.min(regionCells.length, remainingCount));
+      const expectedCount = regionCells.reduce((sum, cell) => sum + heatmap[cell.row][cell.col], 0) /
+        (candidatesDenominator(heatmap) || 1) * remainingLengths.reduce((sum, length) => sum + length, 0);
+      if (remainingCount === 0) {
+        for (const cell of regionCells) heatmap[cell.row][cell.col] = 0;
+      } else {
+        const scale = Math.max(0.25, Math.min(4, remainingCount / Math.max(expectedCount, 0.25)));
+        for (const cell of regionCells) heatmap[cell.row][cell.col] *= scale;
+      }
+    }
+
     const candidates = [];
     let maxScore = 0;
     for (let r = 0; r < size; r++) {
@@ -148,4 +176,8 @@ export class PDMSolver {
 
     return { heatmap, candidates };
   }
+}
+
+function candidatesDenominator(heatmap) {
+  return heatmap.reduce((sum, row) => sum + row.reduce((rowSum, score) => rowSum + score, 0), 0);
 }

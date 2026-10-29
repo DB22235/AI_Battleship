@@ -1,37 +1,52 @@
-# Ship occupancy experiment results
+# Occupancy MLP evaluation
 
-**Task:** rank unshot cells by whether they contain a segment of a still-unsunk ship. This is a cell-level synthetic prediction experiment, not a full-game policy test.
+**Question:** Does a learned ship-cell occupancy score improve the existing PDM shot ranking? The MLP predicts cell occupancy; it is not a new action-selection policy. PDM remains responsible for producing legal candidate shots. Sonar is not modeled in this experiment, so scan usage is not applicable.
 
-## Run configuration
+## Reproduction and protocol
 
-- Generator seed: `20261028`
-- Layouts: 600 legal standard 10×10 fleets; adjacency allowed
-- Fleet: lengths 5, 4, 3, 3, 2
-- Observable snapshots: before shots 0, 3, 6, 10, 14, 18, 23, 28, 34, and 40
-- Split: 420 train / 90 validation / 90 test layouts; grouped by complete layout
-- Candidate rows: 346,080 train / 74,160 validation / 74,160 test
-- Model: NumPy MLP with one 32-unit tanh hidden layer
-- Baseline: remaining ship segments divided by unshot cells, using only observable remaining fleet and shot count
+Command: `python model/src/occupancy_experiment.py --games 600 --seeds 20261028,20261029,20261030`
 
-## Held-out test results
+Each seed produces 600 complete layouts and policy-generated snapshot games, split by complete game into 420 train, 90 validation, and 90 test layouts. Training trajectories use a fixed per-action mixture: 40% current Strategist PDM choices (random among candidates within 5% of top score), 20% current Commander PDM choices (first exact maximum), 25% noisy PDM selected from the top score quintile, and 15% random legal shots. Training layouts use random, edge-biased, and center-biased placement; corner-biased fleets are absent from both training and validation and are a separate placement-style holdout. The held-out full-game evaluation uses 60 layouts per style per seed for random, edge-biased, center-biased, and corner-biased fleets.
 
-| Score | Average precision ↑ | Brier score ↓ |
-|---|---:|---:|
-| Observable base-rate baseline | 0.1667 | 0.1413 |
-| NumPy occupancy MLP | 0.3598 | 0.1259 |
+Feature normalization is fit on training rows only. Features contain candidate coordinates and observable shot/outcome history, sunk status inferred from outcomes, and remaining ship lengths. The hidden fleet is used only to resolve simulated shots and construct occupancy labels. Fleet style and ship coordinates are not input features. All snapshots from a layout remain within one split.
 
-The held-out positive-cell rate was 0.1668. The MLP ranked occupied candidates better than the uninformative base-rate score and had a lower Brier score on this generated test set. This is preliminary evidence on the simulator's uniformly sampled layouts only; it does not establish performance on human layouts or improvement in actual Battleship play.
+The predeclared blend weights were `{0, 0.05, 0.10, 0.20}`; selection used validation layouts only. The per-seed validation choices were 0.00, 0.10, and 0.20. For final held-out games, each validation-selected hybrid was compared to PDM-only and a random-legal baseline on the same layouts. Paired 95% bootstrap intervals use 2,000 deterministic resamples per seed/style.
 
-## Full-game policy comparison
+## Cell-ranking results
 
-The MLP blend weight was selected on 90 separate validation layouts from `{0.00, 0.05, 0.10, 0.20}`. Mean shots-to-sink were 44.28, 45.89, 45.80, and 46.17 respectively. Validation therefore selected **0.00**. On 150 independent test layouts, both PDM and the selected hybrid averaged **44.94 shots**, with a median of **44.5**, hit rate **37.83%**, and **zero invalid/repeated shots**. Mean decision time in this Python simulation was 2.23 ms for PDM and 2.27 ms for the selected hybrid. Since the selected weight is zero, the synthetic model did not improve targeting and is disabled in gameplay shot ranking.
+Metrics are averages across the three independently trained seeds.
 
-The JavaScript MLP inference port remains available in the frontend code, but respects the selected zero weight. Adaptive's active personal signal is the separate browser-local fleet-layout profile learned from the player's completed matches. That personal-history blend has not yet had a dedicated simulated evaluation against repeated placement styles; its influence is deliberately small and relative, not a calibrated probability.
+| Evaluation rows | Score | Average precision ↑ | Brier score ↓ |
+|---|---|---:|---:|
+| Random/edge/center test layouts | Observable remaining-segment baseline | 0.1598 | 0.1095 |
+| Random/edge/center test layouts | Occupancy MLP | 0.3052 | 0.1011 |
+| Corner placement-style holdout | Observable remaining-segment baseline | 0.1668 | 0.1181 |
+| Corner placement-style holdout | Occupancy MLP | 0.2379 | 0.1153 |
 
-## Scope and limitations
+The MLP improves cell-ranking metrics over the observable base-rate score on these synthetic held-out snapshots. That result does not establish better gameplay targeting.
 
-- The blend weight was tuned on a separate 90-layout validation set; the final full-game evaluation used 150 independent layouts.
-- No two-sided win-rate evaluation was run; the full-game test is one-sided shots-to-sink against fixed hidden layouts.
-- Synthetic layout results do not establish adaptation to real players.
-- The secondary project's pretrained policy-gradient checkpoint was not reused because its action probabilities, fleet, and touching rule do not match this occupancy task.
-- Reproduce with `python model/src/occupancy_experiment.py --games 600 --seed 20261028`.
+## Full-game results
+
+Mean shots to sink and hit rate below are averaged across the three seeds (60 layouts/style/seed). Paired difference is hybrid minus PDM, so a negative value favors the hybrid.
+
+| Fleet style | Random baseline shots / hit rate | PDM shots / hit rate | Selected hybrid shots / hit rate | Paired hybrid − PDM shots | Invalid/repeated actions |
+|---|---:|---:|---:|---:|---:|
+| Random | 95.74 / 17.76% | 44.17 / 38.50% | 45.14 / 37.66% | +0.97 | 0 |
+| Edge-biased | 95.01 / 17.89% | 48.50 / 35.08% | 47.97 / 35.44% | -0.53 | 0 |
+| Center-biased | 95.37 / 17.83% | 42.17 / 40.34% | 41.48 / 41.04% | -0.69 | 0 |
+| Corner-biased (held out) | 95.37 / 17.83% | 48.78 / 34.86% | 49.44 / 34.38% | +0.67 | 0 |
+
+The selected hybrid improves on average for edge- and center-biased layouts but regresses for random and corner-biased layouts. Most per-seed/style paired 95% intervals cross zero; one edge-biased seed has an interval below zero, but the gain does not repeat across seeds. Every interval is included in `model/artifacts/results.json`. A stronger rule-based baseline dominates random legal shots, while the occupancy blend does not show a consistent gameplay gain.
+
+## Runtime decision
+
+`recommended_hybrid_weight` in the generated browser artifact is **0.0**. Cell-ranking improvements did not pass the predeclared gameplay consistency gate across seeds and placement styles, so the learned score remains disabled in gameplay ranking. The seed-20261028 model selected weight 0.0 on validation; the other seeds selected positive validation weights, but their mixed held-out outcomes do not justify enabling a weight. This is not active gameplay ML and the model has not learned Sonar use. The separate browser-local fleet-history profile is not evaluated by this experiment.
+
+The saved NPZ, JSON, and JS artifacts are regenerated by the command above. The first seed (20261028) supplies the exported MLP; the experiment records each seed's validation-selected value and held-out evaluation, then sets the runtime blend weight to zero unless all seeds/styles avoid mean regressions and all style aggregates improve. The browser inference port is `frontend/src/ai/occupancy-mlp.js`; it consumes the generated model from `frontend/src/ai/occupancy-model.generated.js`.
+
+## Limitations
+
+- Fleets and trajectories are synthetic; these results do not establish performance against human layouts.
+- The test measures one-sided shots-to-sink, not two-sided match wins.
+- Sonar is excluded from the occupancy feature/evaluation path.
+- No occupancy weight is enabled in runtime gameplay.

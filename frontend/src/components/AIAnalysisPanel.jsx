@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { rowColToLabel } from '../types/constants.js';
 import { PlayerShotPredictor } from '../ai/player-predictor.js';
 
-export function AIAnalysisPanel({ aiResponse, playerShots = [] }) {
+export function AIAnalysisPanel({ aiResponse, playerShots = [], sonarObservations = [], sonarAvailable = false }) {
   const [activeTab, setActiveTab] = useState('ai-targeting');
   const playerPrediction = PlayerShotPredictor.predictNextPlayerShot(playerShots);
 
@@ -18,6 +18,12 @@ export function AIAnalysisPanel({ aiResponse, playerShots = [] }) {
         <span className="badge badge-purple font-mono" style={{ fontSize: '10px' }}>
           {aiResponse ? aiResponse.modelStatus.replace('_', ' ') : 'STANDBY'}
         </span>
+      </div>
+
+      <div style={{ marginBottom: 'var(--space-3)', padding: '9px 11px', borderRadius: 'var(--radius-sm)', background: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', fontSize: 11, color: 'var(--text-secondary)' }}>
+        <strong style={{ color: 'var(--accent-cyan)' }}>Sonar · {sonarAvailable ? '1 charge ready' : 'charge used'}</strong>
+        <div style={{ marginTop: 4 }}>A scan reports only the count of unshot ship cells in its 3×3 region and uses the AI action.</div>
+        {sonarObservations.map(({ center, count }, index) => <div key={`${center.row},${center.col},${index}`} style={{ marginTop: 5, fontFamily: 'monospace' }}><strong>Actual scan observation:</strong> {rowColToLabel(center.row, center.col)} · {count} unshot ship cells</div>)}
       </div>
 
       <div className="tabs" style={{ marginBottom: 'var(--space-3)' }}>

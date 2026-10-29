@@ -91,6 +91,9 @@ htmlcov/
 .ruff_cache/
 .mypy_cache/
 
+# Per-seed ML training exports are reproducible; keep canonical artifacts/reports tracked.
+model/artifacts/replicates/
+
 # Temporary / Scratch files
 tmp/
 temp/

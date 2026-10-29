@@ -34,6 +34,11 @@ export class GameEngine {
     this.matchId = null;
     this.profileLayoutCountAtStart = 0;
     this.aiDecisionLog = [];
+    this.sonarEvents = [];
+    this.playerSonarAvailable = true;
+    this.sonarAvailable = true;
+    this.playerSonarObservations = [];
+    this.sonarObservations = [];
     this.aiPolicyPending = false;
     this.aiTurnTimer = null;
   }
@@ -49,6 +54,11 @@ export class GameEngine {
     this.playerBoard.setFleet(playerFleet);
     this.profileLayoutCountAtStart = LocalStorageProvider.getPlayerFleetLayouts().length;
     this.aiDecisionLog = [];
+    this.sonarEvents = [];
+    this.playerSonarAvailable = true;
+    this.sonarAvailable = true;
+    this.playerSonarObservations = [];
+    this.sonarObservations = [];
     this.aiPolicyPending = false;
     if (this.aiTurnTimer) clearTimeout(this.aiTurnTimer);
     this.aiTurnTimer = null;
@@ -76,6 +86,27 @@ export class GameEngine {
     this.selectedTargetCell = { row, col };
     this._emit('onTargetSelected', this.selectedTargetCell);
     return true;
+  }
+
+  scanPlayerSonar(row, col) {
+    if (this.state !== GAME_STATES.PLAYER_TURN || this.isPaused || !this.playerSonarAvailable) {
+      return { success: false, reason: 'Sonar is unavailable' };
+    }
+    if (!this.enemyBoard.isLegalSonarCenter(row, col)) {
+      return { success: false, reason: 'Choose a center that keeps the full 3×3 scan in bounds' };
+    }
+
+    const count = this.enemyBoard.scanUnshotShipCount(row, col);
+    if (!Number.isInteger(count)) return { success: false, reason: 'Scan could not be resolved' };
+
+    this.playerSonarAvailable = false;
+    const event = { shooter: 'player', center: { row, col }, count, turn: this.turnNumber };
+    this.sonarEvents.push(event);
+    this.playerSonarObservations.push({ center: { row, col }, count, shotsObserved: this.enemyBoard.shots.length });
+    this._emit('onSonarResolved', event);
+    // Player Sonar is a bonus action: the player keeps this turn and may fire.
+    this._notifyState();
+    return { success: true, center: { row, col }, count };
   }
 
   async confirmPlayerShot() {
@@ -124,22 +155,93 @@ export class GameEngine {
   async _executeAITurn() {
     if (this.aiPolicyPending || this.state !== GAME_STATES.AI_PROCESSING) return;
     this.aiPolicyPending = true;
-    const observableState = buildObservableAIState(this.playerBoard);
-    const playerFleetLayouts = LocalStorageProvider.getPlayerFleetLayouts();
+    const chargeBefore = this.sonarAvailable;
+    const observableState = buildObservableAIState(this.playerBoard, this.sonarObservations, this.sonarAvailable);
+    // Charge-available action inference is restricted to current observable
+    // match state. Historical fleet profiles are read only after the charge
+    // has been spent and normal difficulty targeting resumes.
+    const playerFleetLayouts = this.sonarAvailable ? [] : LocalStorageProvider.getPlayerFleetLayouts();
     let targeting;
     try {
-      targeting = await AIPolicies.selectTarget(this.difficulty, observableState, playerFleetLayouts);
+      targeting = await AIPolicies.selectAction(this.difficulty, observableState, playerFleetLayouts);
     } finally {
       this.aiPolicyPending = false;
     }
     if (this.state !== GAME_STATES.AI_PROCESSING) return;
     this.lastAIResponse = targeting;
 
-    const { targetCell } = targeting;
+    if (targeting.action === 'scan') {
+      const { row, col } = targeting.center || {};
+      const count = this.sonarAvailable && this.playerBoard.isLegalSonarCenter(row, col)
+        ? this.playerBoard.scanUnshotShipCount(row, col)
+        : null;
+      if (count !== null) {
+        this.sonarAvailable = false;
+        const observation = { center: { row, col }, count, shotsObserved: observableState.shotsTaken.length };
+        this.sonarObservations.push(observation);
+        const decision = {
+          eventType: 'ai_sonar_scan', action: 'scan', matchId: this.matchId,
+          difficulty: this.difficulty, strategy: targeting.strategy, modelStatus: targeting.modelStatus,
+          profileLayoutCount: targeting.profileLayoutCount ?? this.profileLayoutCountAtStart,
+          profileWeight: targeting.profileWeight ?? 0, syntheticModelWeight: targeting.syntheticModelWeight ?? 0,
+          shotsObserved: observableState.shotsTaken.length, remainingShipLengths: observableState.remainingShipLengths,
+          sonarCenterRow: row, sonarCenterCol: col, sonarCount: count,
+          scanCenter: { row, col }, scanResultCount: count,
+          chargeBefore, chargeAfter: this.sonarAvailable,
+          observationSummary: this._observationSummary(observableState),
+          policyVersion: targeting.policyVersion || 'sonar-action-baseline-v1',
+          policySeed: targeting.seed ?? null,
+          modelVersion: targeting.modelVersion || this._modelVersion(targeting),
+          occupancyModelVersion: targeting.occupancyModelVersion || 'none-active',
+          policyFeatures: targeting.policyFeatures || null,
+          actionValues: targeting.actionValues || null,
+          selectedRegionScoreShare: targeting.selectedRegionScoreShare ?? null,
+          observedOutcome: { type: 'scan', count },
+          decisionReason: this._decisionReason(targeting, 'Rule-based policy selected a sonar scan.'),
+          explanation: targeting.explanation,
+        };
+        this.aiDecisionLog.push(decision);
+        LocalStorageProvider.recordAIEvent(decision);
+        const sonarEvent = { shooter: 'ai', center: { row, col }, count, targetingInfo: targeting };
+        this.sonarEvents.push({ shooter: 'ai', center: { row, col }, count, turn: this.turnNumber });
+        this._emit('onSonarResolved', sonarEvent);
+        this.turnNumber += 1;
+        this.state = GAME_STATES.PLAYER_TURN;
+        this._notifyState();
+        return;
+      }
+      // Invalid scan proposals fall back to a legal shot without consuming
+      // the charge or exposing any board information to the policy.
+      targeting = {
+        ...targeting,
+        action: 'shot',
+        strategy: `${targeting.strategy || 'AI policy'} (legal-shot fallback)`,
+        decisionReason: 'The proposed scan center or charge was invalid; used a legal unshot-cell fallback.',
+      };
+    }
+
+    // Treat only the explicit shot variant as a shot. Malformed or unknown
+    // action payloads can never turn a scan into an accidental extra shot.
+    if (targeting.action !== 'shot') {
+      targeting = {
+        ...targeting,
+        action: 'shot',
+        decisionReason: 'The AI action was invalid; used a legal unshot-cell fallback.',
+      };
+    }
+
+    const legalTarget = this._legalTargetFromResponse(targeting, observableState);
+    if (!legalTarget) {
+      this.state = GAME_STATES.PLAYER_TURN;
+      this._notifyState();
+      return;
+    }
+    const targetCell = legalTarget;
     const shotResult = this.playerBoard.receiveShot(targetCell.row, targetCell.col);
 
     const decision = {
       eventType: 'ai_shot',
+      action: 'shot',
       matchId: this.matchId,
       difficulty: this.difficulty,
       strategy: targeting.strategy,
@@ -152,6 +254,18 @@ export class GameEngine {
       targetRow: targetCell.row,
       targetCol: targetCell.col,
       targetCoordinate: `${String.fromCharCode(65 + targetCell.col)}${targetCell.row + 1}`,
+      selectedTarget: { row: targetCell.row, col: targetCell.col },
+      chargeBefore, chargeAfter: this.sonarAvailable,
+      observationSummary: this._observationSummary(observableState),
+      policyVersion: targeting.policyVersion || 'sonar-action-baseline-v1',
+      policySeed: targeting.seed ?? null,
+      modelVersion: targeting.modelVersion || this._modelVersion(targeting),
+      occupancyModelVersion: targeting.occupancyModelVersion || 'none-active',
+      policyFeatures: targeting.policyFeatures || null,
+      actionValues: targeting.actionValues || null,
+      selectedRegionScoreShare: targeting.selectedRegionScoreShare ?? null,
+      observedOutcome: { type: 'shot', result: shotResult.result },
+      decisionReason: this._decisionReason(targeting, 'Rule-based policy selected a legal shot.'),
       outcome: shotResult.result,
       candidateRanks: (targeting.candidates || []).slice(0, 10).map(candidate => ({
         row: candidate.cell.row,
@@ -188,6 +302,48 @@ export class GameEngine {
     this.turnNumber += 1;
     this.state = GAME_STATES.PLAYER_TURN;
     this._notifyState();
+  }
+
+  _observationSummary(observableState) {
+    return {
+      shotsObserved: observableState.shotsTaken.length,
+      remainingShipLengths: [...observableState.remainingShipLengths],
+      knownSunkShipLengths: [...observableState.knownSunkShipLengths],
+      sonarObservations: observableState.sonarObservations.map(({ center, count }) => ({
+        center: { row: center.row, col: center.col },
+        count,
+      })),
+      sonarAvailable: observableState.sonarAvailable,
+    };
+  }
+
+  _decisionReason(targeting, fallback) {
+    const reason = targeting.decisionReason || targeting.explanation || fallback;
+    const signals = {
+      ...(targeting.policyFeatures ? { features: targeting.policyFeatures } : {}),
+      ...(targeting.actionValues ? { actionValues: targeting.actionValues } : {}),
+    };
+    return Object.keys(signals).length ? `${reason} Signals: ${JSON.stringify(signals)}.` : reason;
+  }
+
+  _modelVersion(targeting) {
+    return targeting.modelVersion || (targeting.syntheticModelWeight > 0 ? 'occupancy-mlp-v1' : 'none-active');
+  }
+
+  _legalTargetFromResponse(targeting) {
+    const isLegal = cell => cell && Number.isInteger(cell.row) && Number.isInteger(cell.col) &&
+      cell.row >= 0 && cell.row < 10 && cell.col >= 0 && cell.col < 10 &&
+      !this.playerBoard.isCellShot(cell.row, cell.col);
+    if (isLegal(targeting.targetCell)) return targeting.targetCell;
+    for (const candidate of targeting.candidates || []) {
+      if (isLegal(candidate.cell)) return candidate.cell;
+    }
+    for (let row = 0; row < 10; row += 1) {
+      for (let col = 0; col < 10; col += 1) {
+        if (isLegal({ row, col })) return { row, col };
+      }
+    }
+    return null;
   }
 
   togglePause() {
@@ -270,6 +426,7 @@ export class GameEngine {
       fleet: this.playerBoard.ships.map(({ id, name, length, orientation, cells }) => ({ id, name, length, orientation, cells })),
       playerShots: this.enemyBoard.shots.map(({ cell, result }) => ({ cell, result })),
       aiDecisions: this.aiDecisionLog,
+      sonarEvents: this.sonarEvents,
     };
     try {
       const saved = await BackendClient.saveMatch(payload);

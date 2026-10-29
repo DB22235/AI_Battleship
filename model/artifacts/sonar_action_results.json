@@ -1,0 +1,598 @@
+{
+  "experiment": "sonar_action_policy",
+  "simulatorVersion": "react-rules-sonar-v1",
+  "actionPolicyVersion": "sonar-tabular-q-v1",
+  "seeds": [
+    20261029,
+    20261030,
+    20261031
+  ],
+  "trainingGamesPerSeed": 1000,
+  "evaluationGamesPerStylePerSeed": 60,
+  "trainingPlacementStyles": [
+    "random",
+    "edge",
+    "center"
+  ],
+  "heldOutPlacementStyles": [
+    "random",
+    "edge",
+    "center",
+    "corner"
+  ],
+  "reward": "-1 per AI shot or scan until all ships sink",
+  "occupancyModelWeight": 0,
+  "runtimeEnabled": false,
+  "runtimeDecision": "fixed-scan fallback; learned policy did not pass acceptance gate",
+  "meanPairedLearnedMinusFixedActionsByStyle": {
+    "random": 1.0833333333333333,
+    "edge": 0.8333333333333335,
+    "center": -0.3055555555555556,
+    "corner": 0.05000000000000012
+  },
+  "replicates": [
+    {
+      "seed": 20261029,
+      "trainingGames": 1000,
+      "evaluation": {
+        "random": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 94.85,
+            "meanShots": 94.85,
+            "meanHitRate": 0.179829076901375,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 44.05,
+            "meanShots": 44.05,
+            "meanHitRate": 0.39970187176089317,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 43.733333333333334,
+            "meanShots": 42.95,
+            "meanHitRate": 0.4089652041134037,
+            "meanScans": 0.7833333333333333,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 44.05,
+            "meanShots": 44.05,
+            "meanHitRate": 0.39970187176089317,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 0.31666666666666665,
+            "bootstrap95CI": [
+              -0.38333333333333336,
+              0.8666666666666667
+            ]
+          }
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 93.78333333333333,
+            "meanShots": 93.78333333333333,
+            "meanHitRate": 0.18223957990988784,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 48.11666666666667,
+            "meanShots": 48.11666666666667,
+            "meanHitRate": 0.3648255064023829,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 46.81666666666667,
+            "meanShots": 45.916666666666664,
+            "meanHitRate": 0.3801478708855734,
+            "meanScans": 0.9,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 48.11666666666667,
+            "meanShots": 48.11666666666667,
+            "meanHitRate": 0.3648255064023829,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.3,
+            "bootstrap95CI": [
+              0.6666666666666666,
+              2.066666666666667
+            ]
+          }
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.21666666666667,
+            "meanShots": 95.21666666666667,
+            "meanHitRate": 0.1792503662097266,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 43.55,
+            "meanShots": 43.55,
+            "meanHitRate": 0.41755860938200107,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 42.28333333333333,
+            "meanShots": 41.46666666666667,
+            "meanHitRate": 0.4350406229164406,
+            "meanScans": 0.8166666666666667,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 43.55,
+            "meanShots": 43.55,
+            "meanHitRate": 0.41755860938200107,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.2666666666666666,
+            "bootstrap95CI": [
+              0.7166666666666667,
+              1.9504166666666642
+            ]
+          }
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.96666666666667,
+            "meanShots": 95.96666666666667,
+            "meanHitRate": 0.17769707597804024,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 48.85,
+            "meanShots": 48.85,
+            "meanHitRate": 0.3583292813508597,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 47.71666666666667,
+            "meanShots": 46.8,
+            "meanHitRate": 0.3731156693244905,
+            "meanScans": 0.9166666666666666,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 48.85,
+            "meanShots": 48.85,
+            "meanHitRate": 0.3583292813508597,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.1333333333333333,
+            "bootstrap95CI": [
+              0.6333333333333333,
+              1.6337499999999976
+            ]
+          }
+        }
+      }
+    },
+    {
+      "seed": 20261030,
+      "trainingGames": 1000,
+      "evaluation": {
+        "random": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 96.06666666666666,
+            "meanShots": 96.06666666666666,
+            "meanHitRate": 0.17739958316639592,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 43.3,
+            "meanShots": 43.3,
+            "meanHitRate": 0.4072766088759791,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 42.166666666666664,
+            "meanShots": 41.416666666666664,
+            "meanHitRate": 0.42656411553137313,
+            "meanScans": 0.75,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 43.56666666666667,
+            "meanShots": 43.18333333333333,
+            "meanHitRate": 0.4089228957359285,
+            "meanScans": 0.38333333333333336,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.4,
+            "bootstrap95CI": [
+              0.2829166666666667,
+              2.5833333333333335
+            ]
+          }
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.78333333333333,
+            "meanShots": 95.78333333333333,
+            "meanHitRate": 0.17792574716954193,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 48.46666666666667,
+            "meanShots": 48.46666666666667,
+            "meanHitRate": 0.3603901514544385,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 46.71666666666667,
+            "meanShots": 45.85,
+            "meanHitRate": 0.37880911838619624,
+            "meanScans": 0.8666666666666667,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 48.083333333333336,
+            "meanShots": 48.03333333333333,
+            "meanHitRate": 0.36411326336025,
+            "meanScans": 0.05,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.3666666666666667,
+            "bootstrap95CI": [
+              0.36625,
+              2.4504166666666647
+            ]
+          }
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 94.76666666666667,
+            "meanShots": 94.76666666666667,
+            "meanHitRate": 0.18009433084545637,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 42.766666666666666,
+            "meanShots": 42.766666666666666,
+            "meanHitRate": 0.42383122636782916,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 41.38333333333333,
+            "meanShots": 40.61666666666667,
+            "meanHitRate": 0.4421461804811052,
+            "meanScans": 0.7666666666666667,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 38.88333333333333,
+            "meanShots": 37.9,
+            "meanHitRate": 0.4761507815032177,
+            "meanScans": 0.9833333333333333,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": -2.5,
+            "bootstrap95CI": [
+              -5.650833333333334,
+              0.667083333333331
+            ]
+          }
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.4,
+            "meanShots": 95.4,
+            "meanHitRate": 0.17857346677806782,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 46.85,
+            "meanShots": 46.85,
+            "meanHitRate": 0.3726227748511178,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 45.46666666666667,
+            "meanShots": 44.65,
+            "meanHitRate": 0.38872474526233697,
+            "meanScans": 0.8166666666666667,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 46.5,
+            "meanShots": 46.35,
+            "meanHitRate": 0.37720022115755414,
+            "meanScans": 0.15,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.0333333333333334,
+            "bootstrap95CI": [
+              -0.017083333333333308,
+              2.0
+            ]
+          }
+        }
+      }
+    },
+    {
+      "seed": 20261031,
+      "trainingGames": 1000,
+      "evaluation": {
+        "random": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.66666666666667,
+            "meanShots": 95.66666666666667,
+            "meanHitRate": 0.17807737605587484,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 43.8,
+            "meanShots": 43.8,
+            "meanHitRate": 0.4004443836101281,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 42.93333333333333,
+            "meanShots": 42.18333333333333,
+            "meanHitRate": 0.41389042139236987,
+            "meanScans": 0.75,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 44.46666666666667,
+            "meanShots": 43.46666666666667,
+            "meanHitRate": 0.4046832995725207,
+            "meanScans": 1.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 1.5333333333333334,
+            "bootstrap95CI": [
+              -0.5666666666666667,
+              3.633749999999998
+            ]
+          }
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.21666666666667,
+            "meanShots": 95.21666666666667,
+            "meanHitRate": 0.17917590381960463,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 47.05,
+            "meanShots": 47.05,
+            "meanHitRate": 0.3717660431689989,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 46.25,
+            "meanShots": 45.36666666666667,
+            "meanHitRate": 0.3844201137311286,
+            "meanScans": 0.8833333333333333,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 46.083333333333336,
+            "meanShots": 45.083333333333336,
+            "meanHitRate": 0.38649242988847815,
+            "meanScans": 1.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": -0.16666666666666666,
+            "bootstrap95CI": [
+              -2.1,
+              1.8333333333333333
+            ]
+          }
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 96.15,
+            "meanShots": 96.15,
+            "meanHitRate": 0.17710437490387318,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 39.81666666666667,
+            "meanShots": 39.81666666666667,
+            "meanHitRate": 0.45091623464622893,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 38.7,
+            "meanShots": 38.016666666666666,
+            "meanHitRate": 0.46816584577706005,
+            "meanScans": 0.6833333333333333,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 39.016666666666666,
+            "meanShots": 38.016666666666666,
+            "meanHitRate": 0.4759489973367054,
+            "meanScans": 1.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": 0.31666666666666665,
+            "bootstrap95CI": [
+              -2.3183333333333334,
+              2.8666666666666667
+            ]
+          }
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "meanAIActionsToSink": 95.56666666666666,
+            "meanShots": 95.56666666666666,
+            "meanHitRate": 0.178359892022548,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "pdm": {
+            "games": 60,
+            "meanAIActionsToSink": 47.516666666666666,
+            "meanShots": 47.516666666666666,
+            "meanHitRate": 0.3714370170791444,
+            "meanScans": 0.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "fixed": {
+            "games": 60,
+            "meanAIActionsToSink": 46.35,
+            "meanShots": 45.55,
+            "meanHitRate": 0.38518617206987854,
+            "meanScans": 0.8,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learned": {
+            "games": 60,
+            "meanAIActionsToSink": 44.333333333333336,
+            "meanShots": 43.333333333333336,
+            "meanHitRate": 0.4077613558355509,
+            "meanScans": 1.0,
+            "invalidOrRepeated": 0,
+            "incompleteGames": 0
+          },
+          "learnedMinusFixedActions": {
+            "mean": -2.0166666666666666,
+            "bootstrap95CI": [
+              -4.48375,
+              0.5004166666666644
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic fleets and PDM-based shot continuation only.",
+    "No player strategy or two-sided win-rate model.",
+    "Occupancy MLP failed its prior gameplay gate and is excluded."
+  ]
+}

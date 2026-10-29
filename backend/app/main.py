@@ -7,12 +7,12 @@ import json
 import threading
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 ROOT = Path(__file__).resolve().parents[2]
 DATA_DIR = ROOT / "model" / "data"
@@ -21,7 +21,7 @@ FLEETS = DATA_DIR / "player_fleet_layouts.csv"
 EVENTS = DATA_DIR / "adaptive_ai_learning_log.csv"
 LOCK = threading.Lock()
 FLEET = {"carrier": 5, "battleship": 4, "cruiser": 3, "submarine": 3, "destroyer": 2}
-EVENT_COLUMNS = ["timestamp", "event_type", "match_id", "difficulty", "strategy", "modelStatus", "profileLayoutCount", "profileWeight", "syntheticModelWeight", "shotsObserved", "remainingShipLengths", "targetRow", "targetCol", "targetCoordinate", "outcome", "candidateRanks", "explanation", "training_source", "fleet_cells_learned", "update_applied"]
+EVENT_COLUMNS = ["timestamp", "event_type", "match_id", "difficulty", "action", "strategy", "modelStatus", "profileLayoutCount", "profileWeight", "syntheticModelWeight", "shotsObserved", "remainingShipLengths", "targetRow", "targetCol", "targetCoordinate", "selectedTarget", "sonarCenterRow", "sonarCenterCol", "scanCenter", "sonarCount", "scanResultCount", "chargeBefore", "chargeAfter", "observationSummary", "policyVersion", "modelVersion", "decisionReason", "outcome", "candidateRanks", "explanation", "training_source", "fleet_cells_learned", "update_applied"]
 MATCH_COLUMNS = ["match_id", "started_at", "completed_at", "difficulty", "result", "turns", "hit_rate", "duration_seconds", "player_shots", "ai_shot_count"]
 FLEET_COLUMNS = ["match_id", "completed_at", "difficulty", "result", "ship_id", "ship_name", "length", "orientation", "cells"]
 
@@ -57,6 +57,30 @@ class Shot(BaseModel):
     result: str
 
 
+class SonarObservation(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    center: Cell
+    count: int = Field(ge=0, le=9)
+    shotsObserved: int = Field(default=0, ge=0, le=100)
+
+    @model_validator(mode="after")
+    def validate_center(self) -> "SonarObservation":
+        if not (1 <= self.center.row <= 8 and 1 <= self.center.col <= 8):
+            raise ValueError("Sonar center must keep the complete 3×3 region in bounds.")
+        return self
+
+
+class DecisionObservationSummary(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    shotsObserved: int = Field(ge=0, le=100)
+    remainingShipLengths: list[int]
+    knownSunkShipLengths: list[int]
+    sonarObservations: list[SonarObservation] = Field(default_factory=list)
+    sonarAvailable: bool
+
+
 class Candidate(BaseModel):
     cell: Cell
     score: float
@@ -69,6 +93,8 @@ class ObservableState(BaseModel):
     shotResults: list[Shot]
     remainingShipLengths: list[int]
     knownSunkShipLengths: list[int]
+    sonarObservations: list[SonarObservation] = Field(default_factory=list)
+    sonarAvailable: bool = False
 
 
 class ScoreRequest(BaseModel):
@@ -78,6 +104,7 @@ class ScoreRequest(BaseModel):
 
 class AIDecision(BaseModel):
     eventType: str = "ai_shot"
+    action: Literal["shot", "scan"] = "shot"
     timestamp: str | None = None
     difficulty: str
     strategy: str
@@ -87,10 +114,22 @@ class AIDecision(BaseModel):
     syntheticModelWeight: float = 0
     shotsObserved: int = 0
     remainingShipLengths: list[int] = []
-    targetRow: int
-    targetCol: int
-    targetCoordinate: str
-    outcome: str
+    targetRow: int | None = None
+    targetCol: int | None = None
+    targetCoordinate: str | None = None
+    selectedTarget: Cell | None = None
+    sonarCenterRow: int | None = None
+    sonarCenterCol: int | None = None
+    scanCenter: Cell | None = None
+    sonarCount: int | None = Field(default=None, ge=0, le=9)
+    scanResultCount: int | None = Field(default=None, ge=0, le=9)
+    chargeBefore: bool | None = None
+    chargeAfter: bool | None = None
+    observationSummary: DecisionObservationSummary | None = None
+    policyVersion: str = "legacy-unspecified"
+    modelVersion: str = "legacy-unspecified"
+    decisionReason: str = ""
+    outcome: str | None = None
     candidateRanks: list[dict[str, Any]] = []
     explanation: str = ""
 
@@ -119,6 +158,20 @@ def _read(path: Path) -> list[dict[str, str]]:
 def _append(path: Path, row: dict[str, Any], columns: list[str]) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     needs_header = not path.exists() or path.stat().st_size == 0
+    if not needs_header:
+        with path.open("r", newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            existing_columns = reader.fieldnames or []
+            existing_rows = list(reader)
+        expanded_columns = list(dict.fromkeys([*existing_columns, *columns]))
+        if expanded_columns != existing_columns:
+            temporary_path = path.with_suffix(path.suffix + ".tmp")
+            with temporary_path.open("w", newline="", encoding="utf-8") as handle:
+                writer = csv.DictWriter(handle, fieldnames=expanded_columns, extrasaction="ignore")
+                writer.writeheader()
+                writer.writerows(existing_rows)
+            temporary_path.replace(path)
+            columns = expanded_columns
     with path.open("a", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=columns, extrasaction="ignore")
         if needs_header:
@@ -157,7 +210,45 @@ def health() -> dict[str, Any]:
 def save_match(match: CompletedMatch) -> dict[str, Any]:
     _validated_fleet(match.fleet)
     player_coords = [(shot.cell.row, shot.cell.col) for shot in match.playerShots]
-    ai_coords = [(decision.targetRow, decision.targetCol) for decision in match.aiDecisions]
+    ai_shots = [decision for decision in match.aiDecisions if decision.action == "shot"]
+    ai_scans = [decision for decision in match.aiDecisions if decision.action == "scan"]
+    if any(decision.action not in {"shot", "scan"} for decision in match.aiDecisions):
+        raise HTTPException(422, "AI action must be shot or scan.")
+    if len(ai_scans) > 1:
+        raise HTTPException(422, "A match may contain at most one sonar scan.")
+    for decision in ai_scans:
+        center = decision.scanCenter or (Cell(row=decision.sonarCenterRow, col=decision.sonarCenterCol)
+                                          if decision.sonarCenterRow is not None and decision.sonarCenterCol is not None
+                                          else None)
+        scan_count = decision.scanResultCount if decision.scanResultCount is not None else decision.sonarCount
+        if center is None or scan_count is None:
+            raise HTTPException(422, "Sonar scan requires a legal center and aggregate count.")
+        if decision.scanCenter is not None and (
+            decision.sonarCenterRow != decision.scanCenter.row or decision.sonarCenterCol != decision.scanCenter.col
+        ):
+            raise HTTPException(422, "Sonar center fields must agree.")
+        if decision.scanResultCount is not None and decision.sonarCount is not None and decision.scanResultCount != decision.sonarCount:
+            raise HTTPException(422, "Sonar aggregate count fields must agree.")
+        if not (1 <= center.row <= 8 and 1 <= center.col <= 8):
+            raise HTTPException(422, "Sonar center must keep the complete 3×3 region in bounds.")
+        if decision.targetRow is not None or decision.targetCol is not None or decision.targetCoordinate is not None or decision.selectedTarget is not None:
+            raise HTTPException(422, "Sonar scan records cannot include a shot target.")
+        if decision.chargeBefore is not True or decision.chargeAfter is not False:
+            raise HTTPException(422, "Sonar scan must consume the available charge.")
+    ai_coords = [(decision.targetRow, decision.targetCol) for decision in ai_shots]
+    if any(decision.targetRow is None or decision.targetCol is None for decision in ai_shots):
+        raise HTTPException(422, "AI shot action requires a target cell.")
+    if any(decision.scanCenter is not None or decision.sonarCenterRow is not None or
+           decision.sonarCenterCol is not None or decision.sonarCount is not None or
+           decision.scanResultCount is not None for decision in ai_shots):
+        raise HTTPException(422, "Shot action records cannot include scan fields.")
+    if any(decision.selectedTarget is not None and (
+        decision.selectedTarget.row != decision.targetRow or decision.selectedTarget.col != decision.targetCol
+    ) for decision in ai_shots):
+        raise HTTPException(422, "Selected target fields must agree.")
+    if any(decision.chargeBefore != decision.chargeAfter for decision in ai_shots
+           if decision.chargeBefore is not None and decision.chargeAfter is not None):
+        raise HTTPException(422, "An ordinary shot cannot change the sonar charge.")
     if len(player_coords) != len(set(player_coords)) or len(ai_coords) != len(set(ai_coords)):
         raise HTTPException(422, "A match cannot contain repeated shots.")
     if any(shot.result not in {"hit", "miss", "sunk"} for shot in match.playerShots):
@@ -167,11 +258,11 @@ def save_match(match: CompletedMatch) -> dict[str, Any]:
         return {"saved": True, "duplicate": True, "matchId": match.matchId}
     now = datetime.now(timezone.utc).isoformat()
     with LOCK:
-        _append(MATCHES, {"match_id": match.matchId, "started_at": match.startedAt or "", "completed_at": match.completedAt or now, "difficulty": match.difficulty, "result": "victory" if match.won else "defeat", "turns": match.turns, "hit_rate": match.hitRate, "duration_seconds": match.durationSeconds, "player_shots": [shot.model_dump() for shot in match.playerShots], "ai_shot_count": len(match.aiDecisions)}, MATCH_COLUMNS)
+        _append(MATCHES, {"match_id": match.matchId, "started_at": match.startedAt or "", "completed_at": match.completedAt or now, "difficulty": match.difficulty, "result": "victory" if match.won else "defeat", "turns": match.turns, "hit_rate": match.hitRate, "duration_seconds": match.durationSeconds, "player_shots": [shot.model_dump() for shot in match.playerShots], "ai_shot_count": len(ai_shots)}, MATCH_COLUMNS)
         for ship in match.fleet:
             _append(FLEETS, {"match_id": match.matchId, "completed_at": match.completedAt or now, "difficulty": match.difficulty, "result": "victory" if match.won else "defeat", "ship_id": ship.id, "ship_name": ship.name, "length": ship.length, "orientation": ship.orientation, "cells": [cell.model_dump() for cell in ship.cells]}, FLEET_COLUMNS)
         for decision in match.aiDecisions:
-            _append(EVENTS, {"timestamp": decision.timestamp or now, "event_type": "ai_shot", "match_id": match.matchId, **decision.model_dump(exclude={"timestamp", "eventType"})}, EVENT_COLUMNS)
+            _append(EVENTS, {"timestamp": decision.timestamp or now, "event_type": decision.eventType, "match_id": match.matchId, **decision.model_dump(exclude={"timestamp", "eventType"})}, EVENT_COLUMNS)
         _append(EVENTS, {"timestamp": now, "event_type": "fleet_profile_update", "match_id": match.matchId, "difficulty": match.difficulty, "training_source": "completed player-deployed fleet layout", "fleet_cells_learned": 17, "update_applied": True}, EVENT_COLUMNS)
     return {"saved": True, "duplicate": False, "matchId": match.matchId, "aiDecisionsSaved": len(match.aiDecisions)}
 

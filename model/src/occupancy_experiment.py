@@ -28,8 +28,8 @@ FEATURE_NAMES = (
 )
 
 
-def generate_fleet(rng: np.random.Generator) -> list[list[tuple[int, int]]]:
-    """Generate a legal standard fleet; adjacency is allowed."""
+def generate_fleet(rng: np.random.Generator, style: str = "random") -> list[list[tuple[int, int]]]:
+    """Generate a legal fleet. Style affects placement only, never features."""
     for _ in range(100):
         occupied: set[tuple[int, int]] = set()
         ships: list[list[tuple[int, int]]] = []
@@ -48,7 +48,20 @@ def generate_fleet(rng: np.random.Generator) -> list[list[tuple[int, int]]]:
             if not placements:
                 valid = False
                 break
-            ship = placements[int(rng.integers(len(placements)))]
+            if style == "random":
+                probabilities = None
+            else:
+                def preference(cells):
+                    row = np.mean([r for r, _ in cells]) / 9
+                    col = np.mean([c for _, c in cells]) / 9
+                    edge = min(row, col, 1 - row, 1 - col)
+                    if style == "edge": return np.exp(-8 * edge)
+                    if style == "center": return np.exp(-8 * (abs(row - .5) + abs(col - .5)))
+                    if style == "corner" : return np.exp(-5 * (row + col))
+                    raise ValueError(f"Unknown fleet style: {style}")
+                probabilities = np.asarray([preference(cells) for cells in placements], dtype=float)
+                probabilities /= probabilities.sum()
+            ship = placements[int(rng.choice(len(placements), p=probabilities))]
             ships.append(ship)
             occupied.update(ship)
         if valid:
@@ -95,33 +108,52 @@ def feature_vector(cell, shots, outcomes, remaining_lengths, known_sunk_cells) -
     return np.asarray(features, dtype=np.float32)
 
 
-def make_examples(games: int, seed: int):
+def make_examples(games: int, seed: int, styles=("random", "edge", "center")):
+    """Build point-in-time examples from gameplay-policy trajectories.
+
+    Trajectory mix is fixed before evaluation: 40% Strategist PDM (random from
+    the top 5%), 20% Commander PDM (first exact maximum), 25% noisy PDM (sample
+    among its top quintile), and 15% random legal. Every snapshot remains
+    grouped by complete layout/game for splitting.
+    """
     rng = np.random.default_rng(seed)
     features, labels, game_ids = [], [], []
     for game_id in range(games):
-        ships = generate_fleet(rng)
+        ships = generate_fleet(rng, styles[game_id % len(styles)])
+        # Simulator-only truth for resolving shot outcomes. Never pass owner or ships to scoring.
         owner = {cell: i for i, ship in enumerate(ships) for cell in ship}
-        order = rng.permutation(100)
         shots: set[tuple[int, int]] = set()
         outcomes: dict[tuple[int, int], str] = {}
         sunk: set[int] = set()
         snapshot_set = set(SNAPSHOTS)
         for step in range(100):
             if step in snapshot_set:
+                # Hidden cells are used only as binary training labels; features below use observable state.
                 remaining = {c for i, ship in enumerate(ships) if i not in sunk for c in ship}
                 for idx in range(100):
                     cell = (idx // 10, idx % 10)
                     if cell in shots:
                         continue
-                    sunk_cells = {c for i, ship in enumerate(ships) if i in sunk for c in ship}
+                    sunk_cells = {cell for cell, result in outcomes.items() if result == "sunk"}
                     remaining_lengths = [len(ship) for i, ship in enumerate(ships) if i not in sunk]
                     features.append(feature_vector(cell, shots, outcomes, remaining_lengths, sunk_cells))
                     labels.append(float(cell in remaining))
                     game_ids.append(game_id)
             if len(sunk) == len(ships):
                 break
-            idx = int(order[step])
-            cell = (idx // 10, idx % 10)
+            available = [(r, c) for r in range(10) for c in range(10) if (r, c) not in shots]
+            trajectory = int(rng.choice(100))
+            remaining_lengths = [len(ship) for i, ship in enumerate(ships) if i not in sunk]
+            if trajectory < 40:
+                cell = choose_policy_cell("pdm", None, None, None, remaining_lengths, shots, outcomes, rng)
+            elif trajectory < 60:
+                cell = choose_policy_cell("commander", None, None, None, remaining_lengths, shots, outcomes, rng)
+            elif trajectory < 85:
+                candidates = density_candidates([len(ship) for i, ship in enumerate(ships) if i not in sunk], shots, outcomes)
+                candidates.sort(key=lambda item: item["score"], reverse=True)
+                cell = candidates[int(rng.integers(max(1, (len(candidates) + 4) // 5)))] ["cell"]
+            else:
+                cell = available[int(rng.integers(len(available)))]
             shots.add(cell)
             if cell in owner:
                 outcomes[cell] = "hit"
@@ -186,7 +218,21 @@ def score_report(y, scores):
             "brier_score": float(np.mean((y - scores) ** 2))}
 
 
-def density_candidates(remaining_lengths, shots, outcomes):
+def grouped_game_split(game_ids, games, seed, train_fraction=.70, validation_fraction=.15):
+    """Split whole games/layouts so snapshots from one fleet cannot cross partitions."""
+    unique_games = np.arange(games)
+    np.random.default_rng(seed).shuffle(unique_games)
+    n_train = int(games * train_fraction)
+    n_val = int(games * validation_fraction)
+    train_ids = set(unique_games[:n_train].tolist())
+    validation_ids = set(unique_games[n_train:n_train + n_val].tolist())
+    test_ids = set(unique_games[n_train + n_val:].tolist())
+    ids = np.asarray(game_ids)
+    return (np.isin(ids, list(train_ids)), np.isin(ids, list(validation_ids)),
+            np.isin(ids, list(test_ids)), train_ids, validation_ids, test_ids)
+
+
+def density_candidates(remaining_lengths, shots, outcomes, sonar_observations=()):
     misses = {cell for cell, result in outcomes.items() if result == "miss"}
     sunk = {cell for cell, result in outcomes.items() if result == "sunk"}
     hits = {cell for cell, result in outcomes.items() if result == "hit"}
@@ -218,6 +264,28 @@ def density_candidates(remaining_lengths, shots, outcomes):
                     if (row + col) % minimum_length != 0:
                         heat[row, col] *= 0.15
 
+    # Match PDMSolver's aggregate sonar constraint. `outcomes` insertion order
+    # is shot order; only hits after the scan reduce its still-unshot count.
+    ordered_shots = list(outcomes.items())
+    for scan in sonar_observations:
+        row, col = scan["center"]
+        remaining_count = int(scan["count"])
+        for (shot_row, shot_col), result in ordered_shots[int(scan.get("shotsObserved", 0)):]:
+            if abs(shot_row - row) <= 1 and abs(shot_col - col) <= 1 and result in ("hit", "sunk"):
+                remaining_count -= 1
+        region = [(r, c) for r in range(row - 1, row + 2) for c in range(col - 1, col + 2)
+                  if (r, c) not in shots]
+        remaining_count = max(0, min(len(region), remaining_count))
+        total_heat = float(np.sum(heat))
+        expected = (sum(heat[r, c] for r, c in region) / (total_heat or 1) * sum(remaining_lengths))
+        if remaining_count == 0:
+            for r, c in region:
+                heat[r, c] = 0
+        else:
+            scale = max(.25, min(4, remaining_count / max(expected, .25)))
+            for r, c in region:
+                heat[r, c] *= scale
+
     result = []
     for row in range(BOARD_SIZE):
         for col in range(BOARD_SIZE):
@@ -226,9 +294,13 @@ def density_candidates(remaining_lengths, shots, outcomes):
     return result
 
 
-def choose_policy_cell(policy, model, mean, scale, ships, shots, outcomes, sunk_ids, rng, model_weight=0.2):
-    remaining_lengths = [len(ship) for i, ship in enumerate(ships) if i not in sunk_ids]
+def choose_policy_cell(policy, model, mean, scale, remaining_lengths, shots, outcomes, rng, model_weight=0.2):
+    if policy == "random":
+        legal = [(r, c) for r in range(BOARD_SIZE) for c in range(BOARD_SIZE) if (r, c) not in shots]
+        return legal[int(rng.integers(len(legal)))]
     candidates = density_candidates(remaining_lengths, shots, outcomes)
+    if policy == "commander":
+        return max(candidates, key=lambda item: item["score"])["cell"]
     if policy == "hybrid" and model_weight > 0:
         sunk_cells = {cell for cell, result in outcomes.items() if result == "sunk"}
         features = np.stack([
@@ -243,7 +315,8 @@ def choose_policy_cell(policy, model, mean, scale, ships, shots, outcomes, sunk_
     else:
         combined = np.asarray([item["score"] for item in candidates], dtype=np.float64)
     maximum = np.max(combined)
-    best = np.flatnonzero(np.isclose(combined, maximum))
+    threshold = maximum * 0.95 if policy == "pdm" else maximum
+    best = np.flatnonzero(combined >= threshold)
     return candidates[int(rng.choice(best))]["cell"]
 
 
@@ -253,7 +326,7 @@ def evaluate_full_games(model, mean, scale, games=150, seed=20266028, model_weig
         layouts = [generate_fleet(rng) for _ in range(games)]
     games = len(layouts)
     results = {}
-    for policy in ("pdm", "hybrid"):
+    for policy in ("random", "pdm", "hybrid"):
         shot_counts, hit_counts, invalid_counts, decision_times = [], [], [], []
         for game_index, ships in enumerate(layouts):
             local_rng = np.random.default_rng(seed + game_index * 3)
@@ -264,7 +337,8 @@ def evaluate_full_games(model, mean, scale, games=150, seed=20266028, model_weig
             invalid = 0
             while len(sunk_ids) < len(ships):
                 start = perf_counter()
-                cell = choose_policy_cell(policy, model, mean, scale, ships, shots, outcomes, sunk_ids, local_rng,
+                remaining_lengths = [len(ship) for i, ship in enumerate(ships) if i not in sunk_ids]
+                cell = choose_policy_cell(policy, model, mean, scale, remaining_lengths, shots, outcomes, local_rng,
                                           model_weight=model_weight)
                 decision_times.append(perf_counter() - start)
                 if cell in shots or not (0 <= cell[0] < 10 and 0 <= cell[1] < 10):
@@ -292,26 +366,28 @@ def evaluate_full_games(model, mean, scale, games=150, seed=20266028, model_weig
             "mean_hit_rate": float(sum(hit_counts) / total_shots) if total_shots else 0,
             "invalid_or_repeated_shots": int(sum(invalid_counts)),
             "mean_decision_time_ms": float(np.mean(decision_times) * 1000),
+            "shots_per_layout": shot_counts,
         }
+    paired = np.asarray(results["hybrid"]["shots_per_layout"]) - np.asarray(results["pdm"]["shots_per_layout"])
+    bootstrap_rng = np.random.default_rng(seed + 99000)
+    bootstrap_means = np.mean(paired[bootstrap_rng.integers(0, len(paired), (2000, len(paired)))], axis=1)
+    results["paired_hybrid_minus_pdm_shots"] = {
+        "mean": float(np.mean(paired)),
+        "bootstrap_95pct_ci": [float(np.quantile(bootstrap_means, .025)), float(np.quantile(bootstrap_means, .975))],
+        "layout_count": int(len(paired)),
+    }
+    for policy in ("random", "pdm", "hybrid"):
+        results[policy].pop("shots_per_layout")
     results["hybrid_minus_pdm_mean_shots"] = (
         results["hybrid"]["mean_shots_to_sink"] - results["pdm"]["mean_shots_to_sink"]
     )
     return results
 
 
-def run(output: Path, games: int, seed: int):
+def run(output: Path, games: int, seed: int, export_frontend=True):
     output.mkdir(parents=True, exist_ok=True)
     x, y, game_ids = make_examples(games, seed)
-    unique_games = np.arange(games)
-    rng = np.random.default_rng(seed + 1)
-    rng.shuffle(unique_games)
-    n_train, n_val = int(games * .70), int(games * .15)
-    train_games = set(unique_games[:n_train].tolist())
-    val_games = set(unique_games[n_train:n_train + n_val].tolist())
-    test_games = set(unique_games[n_train + n_val:].tolist())
-    train = np.isin(game_ids, list(train_games))
-    val = np.isin(game_ids, list(val_games))
-    test = np.isin(game_ids, list(test_games))
+    train, val, test, train_games, val_games, test_games = grouped_game_split(game_ids, games, seed + 1)
 
     # Standardization parameters come from training games only.
     mean, scale = x[train].mean(axis=0), x[train].std(axis=0)
@@ -320,24 +396,37 @@ def run(output: Path, games: int, seed: int):
     model = OccupancyMLP(x.shape[1], seed=seed + 2)
     model.fit(z[train], y[train])
     export = {"format": "adaptive-battleship-occupancy-mlp-v1", "features": list(FEATURE_NAMES),
+              "training_seed": seed, "training_games": games,
+              "trajectory_policy_mix": {"strategist_pdm_top_5pct": 0.40, "commander_pdm_exact_max": 0.20,
+                                        "noisy_pdm_top_quintile": 0.25, "random_legal": 0.15},
+              "validation_candidate_weights": [0.0, 0.05, 0.1, 0.2],
               "hidden_activation": "tanh", "output_activation": "sigmoid",
               "weights": {k: v.tolist() for k, v in {
                   "w1": model.w1, "b1": model.b1, "w2": model.w2, "b2": model.b2,
                   "mean": mean, "scale": scale}.items()}}
     validation_rng = np.random.default_rng(seed + 4000)
-    validation_layouts = [generate_fleet(validation_rng) for _ in range(90)]
+    validation_layouts = [generate_fleet(validation_rng, style)
+                          for style in ("random", "edge", "center") for _ in range(30)]
     validation_weights = {}
+    validation_baselines = None
     for weight in (0.0, 0.05, 0.1, 0.2):
         validation_results = evaluate_full_games(model, mean, scale, seed=seed + 4000,
                                                  model_weight=weight, layouts=validation_layouts)
         validation_weights[str(weight)] = validation_results["hybrid"]["mean_shots_to_sink"]
+        if weight == 0.0:
+            validation_baselines = {
+                "pdm_only_mean_shots_to_sink": validation_results["pdm"]["mean_shots_to_sink"],
+                "random_legal_mean_shots_to_sink": validation_results["random"]["mean_shots_to_sink"],
+            }
     selected_weight = min((float(weight) for weight in validation_weights),
                           key=lambda weight: validation_weights[str(weight)])
     export["recommended_hybrid_weight"] = selected_weight
     test_rng = np.random.default_rng(seed + 5000)
-    test_layouts = [generate_fleet(test_rng) for _ in range(150)]
-    policy_evaluation = evaluate_full_games(model, mean, scale, seed=seed + 5000,
-                                            model_weight=selected_weight, layouts=test_layouts)
+    test_layouts_by_style = {style: [generate_fleet(test_rng, style) for _ in range(60)]
+                             for style in ("random", "edge", "center", "corner")}
+    policy_evaluation = {style: evaluate_full_games(model, mean, scale, seed=seed + 5000,
+                            model_weight=selected_weight, layouts=layouts)
+                         for style, layouts in test_layouts_by_style.items()}
     export["recommended_hybrid_weight"] = selected_weight
     model_score = model.predict(z[test])
     # Observable base rate: known remaining ship segments / unshot cells.
@@ -345,10 +434,19 @@ def run(output: Path, games: int, seed: int):
     test_shots_fraction = x[test, FEATURE_NAMES.index("shots_fraction")]
     test_remaining_fraction = x[test, FEATURE_NAMES.index("remaining_segments_fraction")]
     baseline_score = np.clip(test_remaining_fraction * 17 / np.maximum(100 * (1 - test_shots_fraction), 1), 0, 1)
+    heldout_x, heldout_y, _ = make_examples(60, seed + 6000, styles=("corner",))
+    heldout_z = np.clip((heldout_x - mean) / scale, -5, 5).astype(np.float32)
+    heldout_shots = heldout_x[:, FEATURE_NAMES.index("shots_fraction")]
+    heldout_remaining = heldout_x[:, FEATURE_NAMES.index("remaining_segments_fraction")]
+    heldout_base_rate = np.clip(heldout_remaining * 17 / np.maximum(100 * (1 - heldout_shots), 1), 0, 1)
     report = {
         "experiment": "ship_cell_occupancy",
         "seed": seed,
         "games": games,
+        "trajectory_policy_mix": {"strategist_pdm_top_5pct": 0.40, "commander_pdm_exact_max": 0.20,
+                                  "noisy_pdm_top_quintile": 0.25, "random_legal": 0.15},
+        "training_fleet_styles": ["random", "edge", "center"],
+        "held_out_fleet_style": "corner",
         "split_by_complete_game": {"train": len(train_games), "validation": len(val_games), "test": len(test_games)},
         "rows": {"train": int(train.sum()), "validation": int(val.sum()), "test": int(test.sum())},
         "features": list(FEATURE_NAMES),
@@ -357,15 +455,24 @@ def run(output: Path, games: int, seed: int):
             "observable_base_rate": score_report(y[test], baseline_score),
             "numpy_mlp": score_report(y[test], model_score),
         },
+        "held_out_placement_style": {
+            "style": "corner", "layout_count": 60,
+            "positive_rate": float(heldout_y.mean()),
+            "observable_base_rate": score_report(heldout_y, heldout_base_rate),
+            "numpy_mlp": score_report(heldout_y, model.predict(heldout_z)),
+        },
         "validation_policy_weight_selection": {
             "layout_count": len(validation_layouts),
+            "candidate_weights_predeclared": [0.0, 0.05, 0.1, 0.2],
+            "baselines": validation_baselines,
             "mean_shots_by_model_weight": validation_weights,
             "selected_model_weight": selected_weight,
         },
         "full_game_policy_evaluation_on_independent_layouts": policy_evaluation,
+        "scan_usage": "not_applicable; occupancy-only targeting experiment has no scan action selection",
         "limitations": [
-            "Synthetic uniformly placed standard fleets only; no real-human generalization claim.",
-            "Full-game evaluation is one configured deterministic-weight hybrid comparison, not a measured two-sided win rate.",
+            "Synthetic random, edge-biased, and center-biased training fleets; corner-biased layout style is held out from training.",
+            "Full-game evaluation is a one-sided shots-to-sink comparison, not a measured two-sided win rate.",
             "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid.",
         ],
     }
@@ -377,15 +484,68 @@ def run(output: Path, games: int, seed: int):
     (output / "occupancy_mlp.js").write_text(js_export, encoding="utf-8")
     frontend_model = Path(__file__).resolve().parents[2] / "frontend" / "src" / "ai" / "occupancy-model.generated.js"
     frontend_model.parent.mkdir(parents=True, exist_ok=True)
-    frontend_model.write_text(js_export, encoding="utf-8")
+    if export_frontend:
+        frontend_model.write_text(js_export, encoding="utf-8")
     (output / "results.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
     return report
+
+
+def run_replicates(output: Path, games: int, seeds: list[int]):
+    """Run independent generator/training seeds; first seed exports the browser model."""
+    reports = []
+    for index, seed in enumerate(seeds):
+        run_dir = output if index == 0 else output / "replicates" / str(seed)
+        reports.append(run(run_dir, games, seed, export_frontend=(index == 0)))
+    summary = {
+        "experiment": "ship_cell_occupancy_multi_seed", "seeds": seeds,
+        "exported_model_seed": seeds[0], "replicates": reports,
+        "held_out_style_policy_means": {
+            style: {policy: float(np.mean([
+                rep["full_game_policy_evaluation_on_independent_layouts"][style][policy]["mean_shots_to_sink"]
+                for rep in reports])) for policy in ("random", "pdm", "hybrid")}
+            for style in ("random", "edge", "center", "corner")
+        },
+    }
+    style_means = {style: float(np.mean([
+        rep["full_game_policy_evaluation_on_independent_layouts"][style]["paired_hybrid_minus_pdm_shots"]["mean"]
+        for rep in reports])) for style in ("random", "edge", "center", "corner")}
+    per_seed_pass = all(all(
+        rep["full_game_policy_evaluation_on_independent_layouts"][style]["paired_hybrid_minus_pdm_shots"]["bootstrap_95pct_ci"][1] < 0
+        for style in ("random", "edge", "center", "corner")) for rep in reports)
+    enable_weight = reports[0]["validation_policy_weight_selection"]["selected_model_weight"]
+    enable_weight = enable_weight if per_seed_pass and all(value < 0 for value in style_means.values()) else 0.0
+    summary["runtime_weight_decision"] = {
+        "enabled_weight": enable_weight,
+        "gate": "enable only if every independent seed and every held-out placement style has a paired 95% bootstrap upper bound below zero, with aggregate improvement in every style",
+        "mean_paired_hybrid_minus_pdm_shots_by_style": style_means,
+        "reason": "Held-out gameplay evidence did not pass the predeclared consistency gate." if enable_weight == 0 else "Held-out gameplay evidence passed the predeclared consistency gate.",
+    }
+    # The first replicate is the exported model. The held-out set is used only
+    # as an enable/disable evidence gate, never to tune the selected blend weight.
+    first_export_path = output / "occupancy_mlp.json"
+    first_export = json.loads(first_export_path.read_text(encoding="utf-8"))
+    first_export["validation_selected_hybrid_weight"] = first_export.get("recommended_hybrid_weight", 0.0)
+    first_export["recommended_hybrid_weight"] = enable_weight
+    first_export["gameplay_gate_passed"] = enable_weight > 0
+    js_export = "// Generated by model/src/occupancy_experiment.py; do not edit by hand.\n"
+    js_export += "export const OCCUPANCY_MLP = " + json.dumps(first_export, separators=(",", ":")) + ";\n"
+    first_export_path.write_text(json.dumps(first_export, separators=(",", ":")), encoding="utf-8")
+    (output / "occupancy_mlp.js").write_text(js_export, encoding="utf-8")
+    frontend_model = Path(__file__).resolve().parents[2] / "frontend" / "src" / "ai" / "occupancy-model.generated.js"
+    frontend_model.write_text(js_export, encoding="utf-8")
+    (output / "results.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
+    return summary
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--games", type=int, default=600)
     parser.add_argument("--seed", type=int, default=20261028)
+    parser.add_argument("--seeds", type=str, default="20261028,20261029,20261030",
+                        help="independent seeds; the first seed exports the browser artifact")
     parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parents[1] / "artifacts")
     args = parser.parse_args()
-    print(json.dumps(run(args.output, args.games, args.seed), indent=2))
+    seeds = [int(value.strip()) for value in args.seeds.split(",") if value.strip()]
+    if args.seed != 20261028 and seeds == [20261028, 20261029, 20261030]:
+        seeds[0] = args.seed
+    print(json.dumps(run_replicates(args.output, args.games, seeds), indent=2))

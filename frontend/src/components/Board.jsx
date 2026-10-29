@@ -14,7 +14,8 @@ export function Board({
   isPreviewValid = true,
   heatmap = null,
   showHeatmap = false,
-  showShips = true
+  showShips = true,
+  sonarRegion = null
 }) {
   return (
     <div className={`board-wrapper ${isInteractive ? 'interactive-target' : ''}`}>
@@ -46,6 +47,7 @@ export function Board({
               const isSelected = selectedCell && selectedCell.row === r && selectedCell.col === c;
               const isPreview = previewCells.some(p => p.row === r && p.col === c);
               const heatVal = heatmap && showHeatmap ? heatmap[r][c] : null;
+              const isSonarRegion = sonarRegion && Math.abs(sonarRegion.row - r) <= 1 && Math.abs(sonarRegion.col - c) <= 1;
 
               let cellClasses = ['board-cell'];
 
@@ -57,6 +59,7 @@ export function Board({
               }
 
               if (isSelected) cellClasses.push('cell-selected');
+              if (isSonarRegion) cellClasses.push('sonar-ping');
 
               if (isPreview) {
                 cellClasses.push(isPreviewValid ? 'cell-preview-valid' : 'cell-preview-invalid');
@@ -73,6 +76,8 @@ export function Board({
                   data-row={r}
                   data-col={c}
                   title={rowColToLabel(r, c)}
+                  aria-label={`${rowColToLabel(r, c)}${isSonarRegion ? ', sonar scan region' : ''}`}
+                  style={isSonarRegion ? { animationDelay: `${(Math.abs(sonarRegion.row - r) + Math.abs(sonarRegion.col - c)) * 45}ms` } : undefined}
                   onClick={() => onCellClick && onCellClick(r, c)}
                   onMouseEnter={() => onCellHover && onCellHover(r, c)}
                 >

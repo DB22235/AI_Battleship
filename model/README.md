@@ -14,20 +14,36 @@ Requires Python 3.10+ and NumPy. No TensorFlow, scikit-learn, Gym, backend, or n
 
 ```powershell
 python -m pip install -r model/requirements.txt
-python model/src/occupancy_experiment.py --games 600 --seed 20261028
+python -m unittest discover -s model/tests -v
+python model/src/occupancy_experiment.py --games 600 --seeds 20261028,20261029,20261030
+npm --prefix frontend test
+npm --prefix frontend run build
 ```
 
-The script generates legal 10×10 layouts with the primary fleet and adjacency allowed, simulates random legal shots, and creates candidate-cell snapshots at fixed shot counts. It groups all rows by layout into 70% train, 15% validation, and 15% held-out test partitions. Feature normalization is fitted on training layouts only. A small NumPy MLP is evaluated against the observable remaining-segment base-rate score using average precision and Brier score.
+The generator records point-in-time snapshots from a predeclared action mixture: 40% current Strategist PDM choices (random among candidates within 5% of the top score), 20% current Commander PDM choices (first exact maximum), 25% noisy PDM choices sampled among the top quintile, and 15% random legal shots. Training layouts cycle through random, edge-biased, and center-biased placement. Corner-biased layouts are excluded from model fitting and validation, then used as a placement-style holdout. All snapshots stay grouped by complete layout in 70% train / 15% validation / 15% test splits, and normalization is fit on training layouts only. Fleet placement style and hidden fleet cells never enter the feature vector. The feature builder uses observable shot/outcome history and remaining ship lengths; this occupancy experiment does not use Sonar actions or observations.
+
+The declared gameplay blend candidates are `{0, 0.05, 0.10, 0.20}`. Validation selects a weight; held-out games are used only for final reporting and a conservative enable/disable gate, not to tune it. Evaluation compares random legal shots, PDM-only, and PDM plus the selected occupancy score on the same layouts. Per-layout paired bootstrap intervals are recorded. Three independent seeds are run by default; `--seeds` accepts another comma-separated set. The first seed's MLP is exported. Its runtime weight is set to zero unless every seed and all four held-out placement styles have a paired 95% bootstrap upper bound below zero, with aggregate improvement for every style.
 
 Artifacts are written to `model/artifacts/`:
 
 - `occupancy_mlp.npz`: compact NumPy weights and training-only normalization values.
 - `occupancy_mlp.json`: portable weight export and ordered feature contract for a future browser port.
 - `occupancy_mlp.js`: same export as a native ES module.
+- `replicates/<seed>/`: per-seed model exports and detailed evaluation reports for independent runs after the exported first seed.
 - `../frontend/src/ai/occupancy-model.generated.js`: generated copy consumed by the frontend inference adapter.
-- `results.json`: measured held-out cell-level metrics and limitations.
+- `results.json`: all seed-specific held-out cell-ranking and gameplay metrics, paired uncertainty, validation-only weight selection, and the runtime enable/disable decision.
 
-Full-game validation selected a zero blend weight for this synthetic model, so it is excluded from gameplay ranking. Adaptive's backend profile instead learns empirical fleet-cell frequencies from completed player deployments and blends them with legal PDM scores after at least two layouts. This profile has not been separately evaluated. Player shot coordinates are preserved for match inspection but are not used as evidence of fleet placement. The evaluation is documented in `reports/results.md`.
+The occupancy MLP is a cell-occupancy predictor, not an action-selection policy. The rule-based engine still ranks/selects legal shots; the learned cell score can only blend into PDM candidate rankings if this evaluation supports it. A zero runtime weight means the model is exported for research/inference parity but is not active in gameplay. Browser-local fleet-history profiles are a separate adaptation signal and are not part of this experiment. Player shot coordinates are not used as evidence of fleet placement. The evaluation is documented in `reports/results.md`.
+
+## Sonar shot-versus-scan action policy
+
+The separate contextual action-value experiment is documented in `SONAR_ACTION_POLICY.md`. Reproduce its 3,000 training matches and held-out evaluation with:
+
+```powershell
+python model/src/sonar_action_experiment.py --train-games 1000 --eval-games 60 --seeds 20261029,20261030,20261031
+```
+
+It compares random legal shots, PDM-only shots, the fixed 20% score-mass scan rule, and the learned tabular action-value policy on identical held-out layouts. The generated artifacts are `artifacts/sonar_action_policy.json`, `artifacts/sonar_action_policy.js`, and `artifacts/sonar_action_results.json`, plus the browser module `frontend/src/ai/sonar-action-policy.generated.js`. The policy artifact is enabled only after the documented held-out acceptance gate passes. The occupancy MLP's saved gameplay weight remains zero and is excluded from this action experiment.
 
 ## Local backend data
 

@@ -1,80 +1,761 @@
 {
-  "experiment": "ship_cell_occupancy",
-  "seed": 20261028,
-  "games": 600,
-  "split_by_complete_game": {
-    "train": 420,
-    "validation": 90,
-    "test": 90
-  },
-  "rows": {
-    "train": 346080,
-    "validation": 74160,
-    "test": 74160
-  },
-  "features": [
-    "row_norm",
-    "col_norm",
-    "center_distance",
-    "edge_distance",
-    "is_corner",
-    "row_parity",
-    "col_parity",
-    "shots_fraction",
-    "observed_hits_fraction",
-    "observed_misses_fraction",
-    "adjacent_unsunk_hits",
-    "adjacent_misses",
-    "diagonal_unsunk_hits",
-    "same_row_unsunk_hits",
-    "same_col_unsunk_hits",
-    "nearest_unsunk_hit_distance",
-    "remaining_segments_fraction",
-    "remaining_ships_fraction"
+  "experiment": "ship_cell_occupancy_multi_seed",
+  "seeds": [
+    20261028,
+    20261029,
+    20261030
   ],
-  "held_out_test": {
-    "positive_rate": 0.16680151224136353,
-    "observable_base_rate": {
-      "average_precision": 0.16672688785406717,
-      "brier_score": 0.1412811577320099
+  "exported_model_seed": 20261028,
+  "replicates": [
+    {
+      "experiment": "ship_cell_occupancy",
+      "seed": 20261028,
+      "games": 600,
+      "trajectory_policy_mix": {
+        "strategist_pdm_top_5pct": 0.4,
+        "commander_pdm_exact_max": 0.2,
+        "noisy_pdm_top_quintile": 0.25,
+        "random_legal": 0.15
+      },
+      "training_fleet_styles": [
+        "random",
+        "edge",
+        "center"
+      ],
+      "held_out_fleet_style": "corner",
+      "split_by_complete_game": {
+        "train": 420,
+        "validation": 90,
+        "test": 90
+      },
+      "rows": {
+        "train": 340117,
+        "validation": 72864,
+        "test": 72672
+      },
+      "features": [
+        "row_norm",
+        "col_norm",
+        "center_distance",
+        "edge_distance",
+        "is_corner",
+        "row_parity",
+        "col_parity",
+        "shots_fraction",
+        "observed_hits_fraction",
+        "observed_misses_fraction",
+        "adjacent_unsunk_hits",
+        "adjacent_misses",
+        "diagonal_unsunk_hits",
+        "same_row_unsunk_hits",
+        "same_col_unsunk_hits",
+        "nearest_unsunk_hit_distance",
+        "remaining_segments_fraction",
+        "remaining_ships_fraction"
+      ],
+      "held_out_test": {
+        "positive_rate": 0.12937583029270172,
+        "observable_base_rate": {
+          "average_precision": 0.16153464925631467,
+          "brier_score": 0.11099786311388016
+        },
+        "numpy_mlp": {
+          "average_precision": 0.27998752902037227,
+          "brier_score": 0.10449820756912231
+        }
+      },
+      "held_out_placement_style": {
+        "style": "corner",
+        "layout_count": 60,
+        "positive_rate": 0.13897040486335754,
+        "observable_base_rate": {
+          "average_precision": 0.16886778894826293,
+          "brier_score": 0.11833378672599792
+        },
+        "numpy_mlp": {
+          "average_precision": 0.23596603273427796,
+          "brier_score": 0.11563275754451752
+        }
+      },
+      "validation_policy_weight_selection": {
+        "layout_count": 90,
+        "candidate_weights_predeclared": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "baselines": {
+          "pdm_only_mean_shots_to_sink": 43.78888888888889,
+          "random_legal_mean_shots_to_sink": 95.74444444444444
+        },
+        "mean_shots_by_model_weight": {
+          "0.0": 44.12222222222222,
+          "0.05": 44.41111111111111,
+          "0.1": 44.65555555555556,
+          "0.2": 44.53333333333333
+        },
+        "selected_model_weight": 0.0
+      },
+      "full_game_policy_evaluation_on_independent_layouts": {
+        "random": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.7,
+            "median_shots_to_sink": 97.0,
+            "mean_hit_rate": 0.17763845350052246,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.010565099303282342
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 44.56666666666667,
+            "median_shots_to_sink": 45.0,
+            "mean_hit_rate": 0.381451009723261,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8853646222653369
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 45.483333333333334,
+            "median_shots_to_sink": 45.5,
+            "mean_hit_rate": 0.37376328325393915,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8542094173147848
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 0.9166666666666666,
+            "bootstrap_95pct_ci": [
+              -1.0833333333333333,
+              2.917083333333331
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 0.9166666666666643
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 94.61666666666666,
+            "median_shots_to_sink": 97.0,
+            "mean_hit_rate": 0.17967236216311433,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.00989397567022534
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 46.666666666666664,
+            "median_shots_to_sink": 45.0,
+            "mean_hit_rate": 0.36428571428571427,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.9298936428422167
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 47.96666666666667,
+            "median_shots_to_sink": 48.5,
+            "mean_hit_rate": 0.35441278665740095,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.9285907922209875
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 1.3,
+            "bootstrap_95pct_ci": [
+              -0.6504166666666666,
+              3.083749999999998
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 1.3000000000000043
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 94.98333333333333,
+            "median_shots_to_sink": 96.0,
+            "mean_hit_rate": 0.17897876820494824,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.010494209450660924
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 42.416666666666664,
+            "median_shots_to_sink": 42.0,
+            "mean_hit_rate": 0.40078585461689586,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8544607859278466
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 43.61666666666667,
+            "median_shots_to_sink": 44.0,
+            "mean_hit_rate": 0.3897592663354987,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8308092089822787
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 1.2,
+            "bootstrap_95pct_ci": [
+              -1.9004166666666666,
+              4.250833333333329
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 1.2000000000000028
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.25,
+            "median_shots_to_sink": 97.0,
+            "mean_hit_rate": 0.1784776902887139,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.009993333289031452
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 48.13333333333333,
+            "median_shots_to_sink": 48.0,
+            "mean_hit_rate": 0.35318559556786705,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8774445983650175
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 49.71666666666667,
+            "median_shots_to_sink": 50.5,
+            "mean_hit_rate": 0.34193764666443177,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.837849849149581
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 1.5833333333333333,
+            "bootstrap_95pct_ci": [
+              -0.95,
+              4.066666666666666
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 1.5833333333333357
+        }
+      },
+      "scan_usage": "not_applicable; occupancy-only targeting experiment has no scan action selection",
+      "limitations": [
+        "Synthetic random, edge-biased, and center-biased training fleets; corner-biased layout style is held out from training.",
+        "Full-game evaluation is a one-sided shots-to-sink comparison, not a measured two-sided win rate.",
+        "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid."
+      ]
     },
-    "numpy_mlp": {
-      "average_precision": 0.359777731659942,
-      "brier_score": 0.12593621015548706
+    {
+      "experiment": "ship_cell_occupancy",
+      "seed": 20261029,
+      "games": 600,
+      "trajectory_policy_mix": {
+        "strategist_pdm_top_5pct": 0.4,
+        "commander_pdm_exact_max": 0.2,
+        "noisy_pdm_top_quintile": 0.25,
+        "random_legal": 0.15
+      },
+      "training_fleet_styles": [
+        "random",
+        "edge",
+        "center"
+      ],
+      "held_out_fleet_style": "corner",
+      "split_by_complete_game": {
+        "train": 420,
+        "validation": 90,
+        "test": 90
+      },
+      "rows": {
+        "train": 339924,
+        "validation": 72978,
+        "test": 72474
+      },
+      "features": [
+        "row_norm",
+        "col_norm",
+        "center_distance",
+        "edge_distance",
+        "is_corner",
+        "row_parity",
+        "col_parity",
+        "shots_fraction",
+        "observed_hits_fraction",
+        "observed_misses_fraction",
+        "adjacent_unsunk_hits",
+        "adjacent_misses",
+        "diagonal_unsunk_hits",
+        "same_row_unsunk_hits",
+        "same_col_unsunk_hits",
+        "nearest_unsunk_hit_distance",
+        "remaining_segments_fraction",
+        "remaining_ships_fraction"
+      ],
+      "held_out_test": {
+        "positive_rate": 0.12728703022003174,
+        "observable_base_rate": {
+          "average_precision": 0.15996425961282676,
+          "brier_score": 0.10950462520122528
+        },
+        "numpy_mlp": {
+          "average_precision": 0.31277269237273797,
+          "brier_score": 0.10048844665288925
+        }
+      },
+      "held_out_placement_style": {
+        "style": "corner",
+        "layout_count": 60,
+        "positive_rate": 0.13973228633403778,
+        "observable_base_rate": {
+          "average_precision": 0.16680690149786026,
+          "brier_score": 0.11892034858465195
+        },
+        "numpy_mlp": {
+          "average_precision": 0.23077590461224012,
+          "brier_score": 0.1165657714009285
+        }
+      },
+      "validation_policy_weight_selection": {
+        "layout_count": 90,
+        "candidate_weights_predeclared": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "baselines": {
+          "pdm_only_mean_shots_to_sink": 47.022222222222226,
+          "random_legal_mean_shots_to_sink": 94.96666666666667
+        },
+        "mean_shots_by_model_weight": {
+          "0.0": 46.43333333333333,
+          "0.05": 45.77777777777778,
+          "0.1": 45.58888888888889,
+          "0.2": 45.644444444444446
+        },
+        "selected_model_weight": 0.1
+      },
+      "full_game_policy_evaluation_on_independent_layouts": {
+        "random": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.05,
+            "median_shots_to_sink": 96.0,
+            "mean_hit_rate": 0.17885323513940032,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.023189286400177228
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 44.45,
+            "median_shots_to_sink": 44.5,
+            "mean_hit_rate": 0.38245219347581555,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.849379415028694
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 45.083333333333336,
+            "median_shots_to_sink": 46.0,
+            "mean_hit_rate": 0.37707948243992606,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 4.564238188599685
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 0.6333333333333333,
+            "bootstrap_95pct_ci": [
+              -1.9670833333333333,
+              3.3333333333333335
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 0.6333333333333329
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 94.8,
+            "median_shots_to_sink": 96.0,
+            "mean_hit_rate": 0.17932489451476794,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.0213723804479309
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 49.266666666666666,
+            "median_shots_to_sink": 51.5,
+            "mean_hit_rate": 0.34506089309878213,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.8776186739264649
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 48.233333333333334,
+            "median_shots_to_sink": 49.0,
+            "mean_hit_rate": 0.3524533517622668,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 4.5510572909943345
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": -1.0333333333333334,
+            "bootstrap_95pct_ci": [
+              -3.284583333333333,
+              1.2833333333333334
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": -1.0333333333333314
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.31666666666666,
+            "median_shots_to_sink": 96.0,
+            "mean_hit_rate": 0.17835285889141458,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.021184665162960567
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 40.8,
+            "median_shots_to_sink": 40.0,
+            "mean_hit_rate": 0.4166666666666667,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 2.043166299007282
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 40.75,
+            "median_shots_to_sink": 40.5,
+            "mean_hit_rate": 0.4171779141104294,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 6.846019304608036
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": -0.05,
+            "bootstrap_95pct_ci": [
+              -3.484166666666667,
+              3.4833333333333334
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": -0.04999999999999716
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.68333333333334,
+            "median_shots_to_sink": 98.0,
+            "mean_hit_rate": 0.17766939557568368,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.009535481618710661
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 49.2,
+            "median_shots_to_sink": 51.0,
+            "mean_hit_rate": 0.34552845528455284,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8605601626511746
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 49.05,
+            "median_shots_to_sink": 52.5,
+            "mean_hit_rate": 0.34658511722731905,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.925473564376385
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": -0.15,
+            "bootstrap_95pct_ci": [
+              -2.68375,
+              2.384166666666662
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": -0.15000000000000568
+        }
+      },
+      "scan_usage": "not_applicable; occupancy-only targeting experiment has no scan action selection",
+      "limitations": [
+        "Synthetic random, edge-biased, and center-biased training fleets; corner-biased layout style is held out from training.",
+        "Full-game evaluation is a one-sided shots-to-sink comparison, not a measured two-sided win rate.",
+        "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid."
+      ]
+    },
+    {
+      "experiment": "ship_cell_occupancy",
+      "seed": 20261030,
+      "games": 600,
+      "trajectory_policy_mix": {
+        "strategist_pdm_top_5pct": 0.4,
+        "commander_pdm_exact_max": 0.2,
+        "noisy_pdm_top_quintile": 0.25,
+        "random_legal": 0.15
+      },
+      "training_fleet_styles": [
+        "random",
+        "edge",
+        "center"
+      ],
+      "held_out_fleet_style": "corner",
+      "split_by_complete_game": {
+        "train": 420,
+        "validation": 90,
+        "test": 90
+      },
+      "rows": {
+        "train": 338851,
+        "validation": 72294,
+        "test": 72666
+      },
+      "features": [
+        "row_norm",
+        "col_norm",
+        "center_distance",
+        "edge_distance",
+        "is_corner",
+        "row_parity",
+        "col_parity",
+        "shots_fraction",
+        "observed_hits_fraction",
+        "observed_misses_fraction",
+        "adjacent_unsunk_hits",
+        "adjacent_misses",
+        "diagonal_unsunk_hits",
+        "same_row_unsunk_hits",
+        "same_col_unsunk_hits",
+        "nearest_unsunk_hit_distance",
+        "remaining_segments_fraction",
+        "remaining_ships_fraction"
+      ],
+      "held_out_test": {
+        "positive_rate": 0.1252029836177826,
+        "observable_base_rate": {
+          "average_precision": 0.15789482256962334,
+          "brier_score": 0.10789629071950912
+        },
+        "numpy_mlp": {
+          "average_precision": 0.32275564228434583,
+          "brier_score": 0.09827592968940735
+        }
+      },
+      "held_out_placement_style": {
+        "style": "corner",
+        "layout_count": 60,
+        "positive_rate": 0.13742654025554657,
+        "observable_base_rate": {
+          "average_precision": 0.16483894510963554,
+          "brier_score": 0.11715064942836761
+        },
+        "numpy_mlp": {
+          "average_precision": 0.24688776581289196,
+          "brier_score": 0.11382593214511871
+        }
+      },
+      "validation_policy_weight_selection": {
+        "layout_count": 90,
+        "candidate_weights_predeclared": [
+          0.0,
+          0.05,
+          0.1,
+          0.2
+        ],
+        "baselines": {
+          "pdm_only_mean_shots_to_sink": 43.41111111111111,
+          "random_legal_mean_shots_to_sink": 95.7
+        },
+        "mean_shots_by_model_weight": {
+          "0.0": 46.91111111111111,
+          "0.05": 45.24444444444445,
+          "0.1": 45.22222222222222,
+          "0.2": 45.05555555555556
+        },
+        "selected_model_weight": 0.2
+      },
+      "full_game_policy_evaluation_on_independent_layouts": {
+        "random": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 96.48333333333333,
+            "median_shots_to_sink": 97.0,
+            "mean_hit_rate": 0.1761962342373467,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.009892399422904822
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 43.483333333333334,
+            "median_shots_to_sink": 43.0,
+            "mean_hit_rate": 0.390954388654657,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8697321579437363
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 44.85,
+            "median_shots_to_sink": 45.0,
+            "mean_hit_rate": 0.379041248606466,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.953481568258318
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 1.3666666666666667,
+            "bootstrap_95pct_ci": [
+              -0.9512499999999999,
+              3.65
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 1.3666666666666671
+        },
+        "edge": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.6,
+            "median_shots_to_sink": 96.5,
+            "mean_hit_rate": 0.17782426778242677,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.009901377283924599
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 49.56666666666667,
+            "median_shots_to_sink": 50.0,
+            "mean_hit_rate": 0.3429724277067922,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8697135843227253
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 47.71666666666667,
+            "median_shots_to_sink": 48.0,
+            "mean_hit_rate": 0.35626964722319243,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.972532658019006
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": -1.85,
+            "bootstrap_95pct_ci": [
+              -3.5170833333333333,
+              -0.1995833333333356
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": -1.8500000000000014
+        },
+        "center": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.8,
+            "median_shots_to_sink": 97.5,
+            "mean_hit_rate": 0.17745302713987474,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.010470963895127514
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 43.28333333333333,
+            "median_shots_to_sink": 43.5,
+            "mean_hit_rate": 0.3927608779360801,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8269444357812548
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 40.06666666666667,
+            "median_shots_to_sink": 40.0,
+            "mean_hit_rate": 0.4242928452579035,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.9201545341344661
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": -3.216666666666667,
+            "bootstrap_95pct_ci": [
+              -6.9504166666666665,
+              0.5837499999999978
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": -3.2166666666666615
+        },
+        "corner": {
+          "random": {
+            "games": 60,
+            "mean_shots_to_sink": 95.16666666666667,
+            "median_shots_to_sink": 97.0,
+            "mean_hit_rate": 0.1786339754816112,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.009947162962640145
+          },
+          "pdm": {
+            "games": 60,
+            "mean_shots_to_sink": 49.0,
+            "median_shots_to_sink": 50.0,
+            "mean_hit_rate": 0.3469387755102041,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 0.8193880951762211
+          },
+          "hybrid": {
+            "games": 60,
+            "mean_shots_to_sink": 49.56666666666667,
+            "median_shots_to_sink": 51.5,
+            "mean_hit_rate": 0.3429724277067922,
+            "invalid_or_repeated_shots": 0,
+            "mean_decision_time_ms": 1.9495463685711745
+          },
+          "paired_hybrid_minus_pdm_shots": {
+            "mean": 0.5666666666666667,
+            "bootstrap_95pct_ci": [
+              -1.8833333333333333,
+              2.9504166666666647
+            ],
+            "layout_count": 60
+          },
+          "hybrid_minus_pdm_mean_shots": 0.56666666666667
+        }
+      },
+      "scan_usage": "not_applicable; occupancy-only targeting experiment has no scan action selection",
+      "limitations": [
+        "Synthetic random, edge-biased, and center-biased training fleets; corner-biased layout style is held out from training.",
+        "Full-game evaluation is a one-sided shots-to-sink comparison, not a measured two-sided win rate.",
+        "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid."
+      ]
+    }
+  ],
+  "held_out_style_policy_means": {
+    "random": {
+      "random": 95.74444444444445,
+      "pdm": 44.166666666666664,
+      "hybrid": 45.138888888888886
+    },
+    "edge": {
+      "random": 95.00555555555555,
+      "pdm": 48.5,
+      "hybrid": 47.97222222222223
+    },
+    "center": {
+      "random": 95.36666666666667,
+      "pdm": 42.166666666666664,
+      "hybrid": 41.47777777777778
+    },
+    "corner": {
+      "random": 95.36666666666667,
+      "pdm": 48.77777777777778,
+      "hybrid": 49.44444444444445
     }
   },
-  "validation_policy_weight_selection": {
-    "layout_count": 90,
-    "mean_shots_by_model_weight": {
-      "0.0": 44.27777777777778,
-      "0.05": 45.888888888888886,
-      "0.1": 45.8,
-      "0.2": 46.166666666666664
+  "runtime_weight_decision": {
+    "enabled_weight": 0.0,
+    "gate": "enable only if every independent seed and every held-out placement style has a paired 95% bootstrap upper bound below zero, with aggregate improvement in every style",
+    "mean_paired_hybrid_minus_pdm_shots_by_style": {
+      "random": 0.9722222222222222,
+      "edge": -0.5277777777777778,
+      "center": -0.688888888888889,
+      "corner": 0.6666666666666666
     },
-    "selected_model_weight": 0.0
-  },
-  "full_game_policy_evaluation_on_independent_layouts": {
-    "pdm": {
-      "games": 150,
-      "mean_shots_to_sink": 44.94,
-      "median_shots_to_sink": 44.5,
-      "mean_hit_rate": 0.37828215398308856,
-      "invalid_or_repeated_shots": 0,
-      "mean_decision_time_ms": 2.233720234395048
-    },
-    "hybrid": {
-      "games": 150,
-      "mean_shots_to_sink": 44.94,
-      "median_shots_to_sink": 44.5,
-      "mean_hit_rate": 0.37828215398308856,
-      "invalid_or_repeated_shots": 0,
-      "mean_decision_time_ms": 2.2743406171582237
-    },
-    "hybrid_minus_pdm_mean_shots": 0.0
-  },
-  "limitations": [
-    "Synthetic uniformly placed standard fleets only; no real-human generalization claim.",
-    "Full-game evaluation is one configured deterministic-weight hybrid comparison, not a measured two-sided win rate.",
-    "The browser uses a direct JavaScript inference port and a separate local fleet-history prior; this report evaluates only the offline synthetic-model hybrid."
-  ]
+    "reason": "Held-out gameplay evidence did not pass the predeclared consistency gate."
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Board } from '../components/Board.jsx';
 import { AIAnalysisPanel } from '../components/AIAnalysisPanel.jsx';
 import { rowColToLabel } from '../types/constants.js';
@@ -8,6 +8,9 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
   const [, setTick] = useState(0); // Force re-render on state changes
   const [activeMobileBoard, setActiveMobileBoard] = useState('enemy');
   const [latestEventMessage, setLatestEventMessage] = useState('Commence firing on Enemy Waters.');
+  const [playerSonarMode, setPlayerSonarMode] = useState(false);
+  const [sonarAnimation, setSonarAnimation] = useState(null);
+  const sonarAnimationTimer = useRef(null);
 
   useEffect(() => {
     // Connect React listener to the GameEngine
@@ -33,6 +36,17 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
       setTick(t => t + 1);
     };
 
+    gameEngine.listeners.onSonarResolved = ({ shooter, center, count }) => {
+      const label = rowColToLabel(center.row, center.col);
+      setLatestEventMessage(shooter === 'player'
+        ? `Your Sonar scan at ${label} found ${count} unshot ship cell${count === 1 ? '' : 's'} in the 3×3 region. You may fire this turn.`
+        : `Enemy AI Sonar scanned your fleet at ${label}: ${count} unshot ship cell${count === 1 ? '' : 's'} in the 3×3 region.`);
+      setSonarAnimation({ board: shooter === 'player' ? 'enemy' : 'player', center, key: `${shooter}-${Date.now()}` });
+      if (sonarAnimationTimer.current) clearTimeout(sonarAnimationTimer.current);
+      sonarAnimationTimer.current = setTimeout(() => setSonarAnimation(null), 1450);
+      setTick(t => t + 1);
+    };
+
     gameEngine.listeners.onStateChange = () => {
       setTick(t => t + 1);
     };
@@ -42,6 +56,7 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
     };
 
     return () => {
+      if (sonarAnimationTimer.current) clearTimeout(sonarAnimationTimer.current);
       gameEngine.listeners = {};
     };
   }, [gameEngine, onMatchFinished]);
@@ -55,6 +70,13 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
 
   const handleCellClick = (r, c) => {
     if (!isPlayerTurn || gameEngine.isPaused) return;
+    if (playerSonarMode) {
+      const result = gameEngine.scanPlayerSonar(r, c);
+      if (result.success) setPlayerSonarMode(false);
+      else setLatestEventMessage(result.reason);
+      setTick(t => t + 1);
+      return;
+    }
     if (gameEngine.selectTarget(r, c)) {
       setTick(t => t + 1);
     }
@@ -125,6 +147,15 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
         <span>{latestEventMessage}</span>
       </div>
 
+      <div className="card" role="status" aria-live="polite" style={{ padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-4)' }}>
+          <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>Your Sonar · one charge per match · scan, then fire this turn</span>
+          <span className={`badge ${gameEngine.playerSonarAvailable ? 'badge-cyan' : 'badge-muted'}`}>{gameEngine.playerSonarAvailable ? 'YOUR CHARGE READY' : 'YOUR CHARGE USED'}</span>
+          <span style={{ fontSize: 12, color: 'var(--text-secondary)' }}>AI Sonar · one charge per match · spends the AI action</span>
+          <span className={`badge ${gameEngine.sonarAvailable ? 'badge-cyan' : 'badge-muted'}`}>{gameEngine.sonarAvailable ? 'AI CHARGE READY' : 'AI CHARGE USED'}</span>
+        </div>
+      </div>
+
       {/* Mobile Board Toggle */}
       <div className="tabs mobile-only-toggle" style={{ display: 'none', marginBottom: 'var(--space-2)' }}>
         <button
@@ -155,6 +186,7 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
             subtitle={<>Remaining: <strong className="text-cyan">{playerRemaining}/5</strong></>}
             grid={gameEngine.playerBoard.grid}
             isInteractive={false}
+            sonarRegion={sonarAnimation?.board === 'player' ? sonarAnimation.center : null}
           />
         </div>
 
@@ -173,17 +205,35 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
             isInteractive={isPlayerTurn && !gameEngine.isPaused}
             selectedCell={selected}
             onCellClick={handleCellClick}
+            sonarRegion={sonarAnimation?.board === 'enemy' ? sonarAnimation.center : null}
           />
 
           {/* Action Bar */}
           <div style={{ marginTop: 'var(--space-3)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--surface-card)', border: '1px solid var(--border-subtle)', borderRadius: 'var(--radius-md)', padding: 'var(--space-3) var(--space-4)', flexWrap: 'wrap', gap: 'var(--space-2)' }}>
             <div style={{ fontSize: '13px' }}>
-              {selected ? (
+              {playerSonarMode ? (
+                <span style={{ color: 'var(--accent-cyan)' }}>Choose a center from B2 through I9</span>
+              ) : selected ? (
                 <>Target: <span className="badge badge-cyan font-mono">{rowColToLabel(selected.row, selected.col)}</span></>
               ) : (
                 <span style={{ color: 'var(--text-muted)' }}>Select an unshot cell on Enemy Waters</span>
               )}
             </div>
+
+            <button
+              className="btn btn-secondary"
+              disabled={!gameEngine.playerSonarAvailable || !isPlayerTurn || gameEngine.isPaused}
+              onClick={() => {
+                const nextMode = !playerSonarMode;
+                setPlayerSonarMode(nextMode);
+                setLatestEventMessage(nextMode
+                  ? 'Choose a center cell from B2 through I9 for your 3×3 Sonar scan.'
+                  : 'Sonar targeting cancelled.');
+              }}
+              style={{ padding: '8px 16px' }}
+            >
+              {playerSonarMode ? 'Cancel Sonar' : 'Use Sonar'}
+            </button>
 
             <button
               className="btn btn-primary"
@@ -204,6 +254,8 @@ export function GameplayArena({ gameEngine, onExitMatch, onMatchFinished }) {
           <AIAnalysisPanel
             aiResponse={gameEngine.lastAIResponse}
             playerShots={gameEngine.enemyBoard.shots}
+            sonarObservations={gameEngine.sonarObservations}
+            sonarAvailable={gameEngine.sonarAvailable}
           />
         </div>
       </div>

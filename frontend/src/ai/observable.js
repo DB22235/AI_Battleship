@@ -4,7 +4,7 @@
 
 import { BOARD_SIZE } from '../types/constants.js';
 
-export function buildObservableAIState(playerBoard) {
+export function buildObservableAIState(playerBoard, sonarObservations = [], sonarAvailable = false) {
   const shotsTaken = [];
   const shotResults = [];
 
@@ -22,5 +22,11 @@ export function buildObservableAIState(playerBoard) {
     shotResults,
     remainingShipLengths: playerBoard.getRemainingShipLengths(),
     knownSunkShipLengths: playerBoard.getSunkShipLengths(),
+    sonarObservations: sonarObservations.map(({ center, count, shotsObserved }) => ({
+      center: { row: center.row, col: center.col },
+      count,
+      ...(Number.isInteger(shotsObserved) ? { shotsObserved } : {}),
+    })),
+    sonarAvailable,
   };
 }

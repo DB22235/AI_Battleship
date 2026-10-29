@@ -5,8 +5,89 @@
 import { PDMSolver } from './pdm-solver.js';
 import { PersonalizedOccupancyModel } from './personalized-occupancy.js';
 import { BackendClient } from '../api/backend-client.js';
+import { OCCUPANCY_MLP, scoreOccupancyCandidate } from './occupancy-mlp.js';
+import { decideSonarAction } from './sonar-action-policy.js';
+
+/**
+ * @typedef {{action: 'shot', targetCell: {row: number, col: number}}} ShotAction
+ * @typedef {{action: 'scan', center: {row: number, col: number}}} SonarScanAction
+ * @typedef {ShotAction | SonarScanAction} AIDecisionAction
+ */
+
+const SONAR_ACTION_POLICY_VERSION = 'sonar-action-baseline-v1';
 
 export class AIPolicies {
+  static async selectAction(difficulty, state, playerFleetLayouts = []) {
+    if (!state.sonarAvailable) {
+      const targeting = await this.selectTarget(difficulty, state, playerFleetLayouts);
+      return this.asShotAction(targeting);
+    }
+
+    // A charge-available power-up decision receives only this match's
+    // observable PDM candidates. It does not consult hidden fleet state or
+    // browser-stored fleet layouts. The previous occupancy experiment failed
+    // its gameplay gate, so its scores are not computed or blended here.
+    const { candidates } = PDMSolver.computeDensity(state);
+    let rankedCandidates = candidates;
+    let occupancyModelVersion = 'none-active';
+    if (OCCUPANCY_MLP.gameplay_gate_passed === true &&
+        Number.isFinite(OCCUPANCY_MLP.recommended_hybrid_weight) &&
+        OCCUPANCY_MLP.recommended_hybrid_weight > 0) {
+      const modelWeight = OCCUPANCY_MLP.recommended_hybrid_weight;
+      const modelScores = candidates.map(({ cell }) => scoreOccupancyCandidate(state, cell));
+      const ruleTotal = candidates.reduce((sum, item) => sum + Math.max(0, item.score), 0) || 1;
+      const modelTotal = modelScores.reduce((sum, score) => sum + score, 0) || 1;
+      rankedCandidates = candidates.map((item, index) => ({
+        ...item,
+        score: (1 - modelWeight) * Math.max(0, item.score) / ruleTotal +
+          modelWeight * modelScores[index] / modelTotal,
+      })).sort((a, b) => b.score - a.score || a.cell.row - b.cell.row || a.cell.col - b.cell.col);
+      occupancyModelVersion = OCCUPANCY_MLP.format;
+    }
+
+    const action = decideSonarAction({ state, candidates: rankedCandidates });
+    return {
+      ...action,
+      strategy: action.modelStatus === 'trained_action_policy'
+        ? 'Trained Sonar Action-Value Policy'
+        : action.modelStatus === 'rule_based_fallback'
+          ? 'PDM + Fixed Sonar Scan Rule'
+          : 'Observable PDM Action Policy',
+      occupancyModelVersion,
+      ...(occupancyModelVersion !== 'none-active'
+        ? { syntheticModelWeight: OCCUPANCY_MLP.recommended_hybrid_weight }
+        : { syntheticModelWeight: 0 }),
+    };
+  }
+
+  static asShotAction(targeting) {
+    const { center: _scanCenter, ...analysis } = targeting;
+    return {
+      ...analysis,
+      action: 'shot',
+      targetCell: targeting.targetCell,
+      policyVersion: targeting.policyVersion || SONAR_ACTION_POLICY_VERSION,
+    };
+  }
+
+  static bestSonarRegion(candidates, boardSize) {
+    if (!candidates.length) return null;
+    const scoreByCell = new Map(candidates.map(({ cell, score }) => [`${cell.row},${cell.col}`, Math.max(0, score)]));
+    const totalScore = [...scoreByCell.values()].reduce((sum, score) => sum + score, 0);
+    if (!totalScore) return null;
+    let best = null;
+    for (let row = 1; row < boardSize - 1; row += 1) {
+      for (let col = 1; col < boardSize - 1; col += 1) {
+        let score = 0;
+        for (let r = row - 1; r <= row + 1; r += 1) {
+          for (let c = col - 1; c <= col + 1; c += 1) score += scoreByCell.get(`${r},${c}`) || 0;
+        }
+        if (!best || score > best.score) best = { center: { row, col }, score };
+      }
+    }
+    return best ? { ...best, scoreShare: best.score / totalScore } : null;
+  }
+
   static async selectTarget(difficulty, state, playerFleetLayouts = []) {
     switch (difficulty.toLowerCase()) {
       case 'recruit':
